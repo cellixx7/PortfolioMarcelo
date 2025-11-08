@@ -1,0 +1,402 @@
+/* CSS Variables for easy customization */
+:root {
+    /* ===== Positioning Variables ===== */
+    /* Para ajustar a posição vertical (Y) de elementos:
+     * Use --element-position-y no elemento HTML
+     * Exemplo: style="--menu-position-y: 20vh" (20% da altura da tela)
+     * Valores positivos: move para baixo
+     * Valores negativos: move para cima
+     */
+    
+    /* Para ajustar a posição horizontal (X) de elementos:
+     * Use --element-position-x no elemento HTML
+     * Exemplo: style="--menu-position-x: 20vw" (20% da largura da tela)
+     * Valores positivos: move para direita
+     * Valores negativos: move para esquerda
+     */
+
+    /* ===== Colors ===== */
+    --bg-gradient-1: rgb(0, 0, 0);
+    --bg-gradient-2: rgb(5, 1, 29);
+    --bg-gradient-3: rgb(5, 0, 21);
+    --text-color: #fff;
+    --menu-item-bg: white;
+    --menu-icon-color: #777;
+    
+    /* ===== Sizes ===== */
+    --menu-item-size: 60px;      /* Tamanho dos botões do menu */
+    --menu-gap: 25px;            /* Espaço entre os botões do menu */
+    --card-width: 200px;         /* Largura dos cards */
+    --card-height: 250px;        /* Altura dos cards */
+    
+    /* ===== Timings ===== */
+    --gradient-animation-duration: 15s;
+    --menu-transition-duration: 0.5s;
+    --wave-animation-duration: 10s;
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Background with parallax effect */
+.parallax-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: linear-gradient(315deg, 
+        var(--bg-gradient-1) 3%, 
+        var(--bg-gradient-2) 38%, 
+        var(--bg-gradient-1) 68%, 
+        var(--bg-gradient-3) 98%);
+    animation: gradient var(--gradient-animation-duration) ease infinite;
+    background-size: 400% 400%;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Changed to allow scrolling */
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 2px; /* Adds depth for parallax effect */
+    background: transparent; /* Remove background from body */
+}
+
+/* Container for main content */
+.container {
+    /* Container principal - controla o posicionamento geral dos elementos
+     * Para mover todo o conteúdo, ajuste as margens ou padding aqui
+     * margin: top right bottom left
+     */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 200vh; /* Makes the page scrollable */
+    position: relative; /* For proper z-index stacking */
+    z-index: 1; /* Keeps content above background */
+    
+    /* Ajuste a posição do container inteiro:
+     * transform: translate(X, Y);
+     * Exemplo: transform: translate(100px, -50px);
+     * X positivo = direita, X negativo = esquerda
+     * Y positivo = baixo, Y negativo = cima
+     */
+    transform: translate(
+        var(--container-position-x, 0),
+        var(--container-position-y, 0)
+    );
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+.wave {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 1000% 1000% 0 0;
+    position: fixed;
+    width: 200%;
+    height: 12em;
+    animation: wave 10s -3s linear infinite;
+    transform: translate3d(0, 0, 0);
+    opacity: 0.8;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.wave:nth-of-type(2) {
+    bottom: -1.25em;
+    animation: wave 18s linear reverse infinite;
+    opacity: 0.8;
+}
+
+.wave:nth-of-type(3) {
+    bottom: -2.5em;
+    animation: wave 20s -1s reverse infinite;
+    opacity: 0.9;
+}
+
+@keyframes wave {
+    2% {
+        transform: translateX(1);
+    }
+
+    25% {
+        transform: translateX(-25%);
+    }
+
+    50% {
+        transform: translateX(-50%);
+    }
+
+    75% {
+        transform: translateX(-25%);
+    }
+
+    100% {
+        transform: translateX(1);
+    }
+}
+
+
+/* Cards Section */
+.cards-section {
+    /* Para ajustar a posição dos cards:
+     * No HTML: <section class="cards-section" style="--cards-position-y: 40vh; --cards-position-x: 20vw">
+     * --cards-position-y: controla posição vertical (mais alto ou mais baixo)
+     * --cards-position-x: controla posição horizontal (esquerda ou direita)
+     */
+    width: 100%;
+    margin: var(--cards-position-y, 1rem) 0;
+    display: flex;
+    justify-content: center;
+    transform: translateX(var(--cards-position-x, 0));
+}
+
+/* Content Sections */
+.content-section {
+    width: 100%;
+    min-height: 100vh;
+    margin-top: var(--section-margin, 50vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.section-content {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 80%;
+    max-width: 1000px;
+}
+
+.card {
+    width: var(--card-width);
+    height: var(--card-height);
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+}
+
+.card-front {
+  background: #ffffff00;
+  color: white;
+  border: 1px solid #ffffff6a;
+  box-shadow: #ffffff07 0 0 10px 0px;
+  filter: blur(5);
+}
+
+.card-back {
+  background: #ffffff;
+  color: rgb(0, 0, 0);
+  box-shadow: #ffffff07 0 0 10px 0px;
+  transform: rotateY(180deg);
+}
+
+/* Menu Styles */
+/* Menu principal */
+.menu {
+    /* Para ajustar a posição vertical do menu:
+     * No HTML: <nav class="menu" style="--menu-position-y: 20vh">
+     * Valores maiores = mais para baixo
+     * Valores negativos = mais para cima
+     */
+    position: relative;
+    width: 100%;
+    margin: var(--menu-position-y, 0) 0;
+    /* Para ajustar a posição horizontal do menu:
+     * No HTML: <nav class="menu" style="--menu-position-x: 20vw">
+     */
+    transform: translateX(var(--menu-position-x, 0));
+}
+
+.menu ul {
+    /* Controla o layout dos botões do menu
+     * gap: controla o espaço entre os botões
+     * justify-content: center = centralizado
+     * justify-content: flex-start = à esquerda
+     * justify-content: flex-end = à direita
+     */
+    display: flex;
+    position: relative;
+    gap: var(--menu-gap);
+    justify-content: center;
+}
+
+.menu ul li {
+    position: relative;
+    list-style: none;
+    width: var(--menu-item-size);
+    height: var(--menu-item-size);
+    background: var(--menu-item-bg);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-radius: var(--menu-item-size);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--menu-transition-duration);
+}
+
+ul li::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 60px;
+  background: linear-gradient(45deg, var(--i), var(--j));
+  opacity: 0;
+  transition: 0.5s;
+}
+
+ul li::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 60px;
+  background: linear-gradient(45deg, var(--i), var(--j));
+  transition: 0.5s;
+  filter: blur(15px);
+  z-index: -1;
+  opacity: 0;
+}
+
+.menu ul li:hover {
+    width: var(--hover-width, 180px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0);
+}
+
+.menu ul li:hover::before {
+    opacity: 1;
+}
+
+.menu ul li:hover::after {
+    opacity: 0.5;
+}
+
+.menu ul li ion-icon {
+    color: var(--menu-icon-color);
+    font-size: 1.75em;
+    transition: var(--menu-transition-duration);
+    transition-delay: 0.25s;
+}
+
+ul li:hover ion-icon {
+  transform: scale(0);
+  color: #fff;
+  transition-delay: 0s;
+}
+
+ul li span {
+  position: absolute;
+}
+
+ul li .title {
+  color: #fff;
+  font-size: 1.1em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: scale(0);
+  transition: 0.5s;
+  transition-delay: 0s;
+}
+
+ul li:hover .title {
+  transform: scale(1);
+  transition-delay: 0.25s;
+}
+
+
+/* Cursor */
+.cursor{
+    position: relative;
+    width: 24em;
+    margin: 0 auto;
+    border-right: 2px solid rgba(255,255,255,.75);
+    font-size: 30px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);    
+}
+/* Animation */
+.typewriter-animation {
+    color: #fff;
+  animation: 
+    typewriter 5s steps(50) 1s 1 normal both, 
+    blinkingCursor 500ms steps(50) infinite normal;
+}
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes blinkingCursor{
+  from { border-right-color: rgba(255,255,255,.75); }
+  to { border-right-color: transparent; }
+}
+
+
+
+
+
+
+
+
+
+
+
+  
+
