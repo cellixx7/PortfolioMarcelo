@@ -1,80 +1,128 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Marcelo V. | Dev FullStack</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-    <!-- Parallax Background -->
-    <div class="parallax-bg"></div>
-    
-    <!-- Background Waves -->
-    <div class="background-effects">
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-    </div>
 
-    <!-- Main Content Container -->
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marcelo V. | Dev FullStack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body id="top">
+    <!-- Fundo animado -->
+    <div class="gradient-bg"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div id="logo">
+            <p class="nomeTitle">Marcelo V.</p>
+        </div>
+
+        <div class="nav-links">
+            <div class="nav-item" data-section="sobre-section">Sobre</div>
+            <div class="nav-item" data-section="portfolio-section">Projetos</div>
+            <div class="nav-item" data-section="skills-section">Habilidades</div>
+            <div class="nav-item" data-section="contato-section">Contato</div>
+            <div id="github" class="nav-item">
+                <ion-icon name="logo-github" href="https://github.com/cellixx7"></ion-icon>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Conteúdo principal -->
     <main class="container">
-        <!-- Header Section -->
         <header class="header">
-            <p class="cursor typewriter-animation" style="--typing-speed: 5s; --text-width: 24em;">
-                Marcelo Vaz Oliveira, Dev e Designer Web!
+            <h1 class="Name-title">Marcelo V. Oliveira</h1>
+            <p class="desc cursor typewriter-animation" style="--typing-speed: 5s; --text-width: 24em;">
+                Desenvolvedor Fullstack e Web Designer!
             </p>
+
+            <div class="header-buttons">
+                <button class="btn bubbly" data-section="contato-section">
+                    Entre em contato
+                </button>
+                <button class="btn bubbly proj" data-section="portfolio-section">
+                    Meus projetos
+                </button>
+            </div>
         </header>
 
-        <!-- Navigation Menu -->
-        <nav class="menu" style="--menu-position-y: 20vh">
-            <ul>
-                <li style="--i:#a955ff;--j:#ea51ff;--hover-width:180px">
-                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                    <span class="title">Home</span>
-                </li>
-                <li style="--i:#56CCF2;--j:#2F80ED;--hover-width:180px">
-                    <span class="icon"><ion-icon name="videocam-outline"></ion-icon></span>
-                    <span class="title">Video</span>
-                </li>
-                <li style="--i:#FF9966;--j:#FF5E62;--hover-width:180px">
-                    <span class="icon"><ion-icon name="camera-outline"></ion-icon></span>
-                    <span class="title">Photo</span>
-                </li>
-                <li style="--i:#80FF72;--j:#7EE8FA;--hover-width:180px">
-                    <span class="icon"><ion-icon name="share-social-outline"></ion-icon></span>
-                    <span class="title">Share</span>
-                </li>
-                <li style="--i:#ffa9c6;--j:#f434e2;--hover-width:180px">
-                    <span class="icon"><ion-icon name="heart-outline"></ion-icon></span>
-                    <span class="title">Like</span>
-                </li>
-            </ul>
-        </nav>
 
-        <!-- Card Section -->
-        <section class="cards-section" style="--cards-position-y: 40vh">
-            <div class="card">
-                <div class="card-inner">
-                    <div class="card-front">Front Side</div>
-                    <div class="card-back">Back Side</div>
+        <!-- SOBRE -->
+        <section id="sobre-section" class="full-section">
+            <div class="section-content">
+                <h2>Sobre Mim</h2>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>Desenvolvedor Fullstack apaixonado por criar soluções inovadoras.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Additional sections for scrollable content -->
-        <section class="content-section" style="--section-margin: 100vh">
+
+        <!-- PROJETOS -->
+        <section id="portfolio-section" class="full-section">
             <div class="section-content">
-                <!-- Add your content here -->
+                <h2>Projetos</h2>
+                <div class="modern-grid">
+                    <div class="modern-card">
+                        <h4>Projeto 1</h4>
+                        <p>Exemplo de projeto com tecnologias modernas.</p>
+                    </div>
+                    <div class="modern-card">
+                        <h4>Projeto 2</h4>
+                        <p>Outro projeto com design responsivo e interativo.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="content-section" style="--section-margin: 50vh">
+
+        <!-- HABILIDADES -->
+        <section id="skills-section" class="full-section">
             <div class="section-content">
-                <!-- Add your content here -->
+                <h2>Habilidades</h2>
+                <div class="cards-section">
+                    <div class="card">
+                        <div class="card-inner">
+                            <div class="card-front">HTML, CSS & JS</div>
+                            <div class="card-back">
+                                <p class="CardDesc">Criação de interfaces modernas e responsivas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-inner">
+                            <div class="card-front">Python</div>
+                            <div class="card-back">
+                                <p class="CardDesc">Automação e desenvolvimento backend.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-inner">
+                            <div class="card-front">MySQL</div>
+                            <div class="card-back">
+                                <p class="CardDesc">Gerenciamento de bancos de dados relacionais.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- CONTATO -->
+        <section id="contato-section" class="full-section">
+            <div class="section-content">
+                <h2>Contato</h2>
+                <p>Entre em contato para colaborações ou projetos!</p>
+                <!-- Adicione formulário ou links de contato aqui -->
             </div>
         </section>
     </main>
@@ -83,4 +131,5 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

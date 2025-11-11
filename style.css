@@ -1,33 +1,25 @@
 /* CSS Variables for easy customization */
 :root {
-    /* ===== Positioning Variables ===== */
-    /* Para ajustar a posição vertical (Y) de elementos:
-     * Use --element-position-y no elemento HTML
-     * Exemplo: style="--menu-position-y: 20vh" (20% da altura da tela)
-     * Valores positivos: move para baixo
-     * Valores negativos: move para cima
-     */
+    /* ===== Color Scheme ===== */
+    --primary-color: #763bff;
+    --primary-rgb: 169, 85, 255;
+    --secondary-color: #2da54d;
+    --accent-color: #FF9966;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --navbar-bg: rgba(17, 17, 17, 0.8);
+    --navbar-height: 70px;
     
-    /* Para ajustar a posição horizontal (X) de elementos:
-     * Use --element-position-x no elemento HTML
-     * Exemplo: style="--menu-position-x: 20vw" (20% da largura da tela)
-     * Valores positivos: move para direita
-     * Valores negativos: move para esquerda
-     */
-
-    /* ===== Colors ===== */
-    --bg-gradient-1: rgb(0, 0, 0);
-    --bg-gradient-2: rgb(5, 1, 29);
-    --bg-gradient-3: rgb(5, 0, 21);
-    --text-color: #fff;
-    --menu-item-bg: white;
-    --menu-icon-color: #777;
+    /* Section Background Colors */
+    --section-bg-1: rgba(10, 10, 10, 0);
+    --section-bg-2: #0f0f0f;
+    --section-bg-3: #080808;
     
     /* ===== Sizes ===== */
-    --menu-item-size: 60px;      /* Tamanho dos botões do menu */
-    --menu-gap: 25px;            /* Espaço entre os botões do menu */
-    --card-width: 200px;         /* Largura dos cards */
-    --card-height: 250px;        /* Altura dos cards */
+    --menu-item-size: 60px;
+    --menu-gap: 25px;
+    --card-width: 200px;
+    --card-height: 250px;
     
     /* ===== Timings ===== */
     --gradient-animation-duration: 15s;
@@ -43,141 +35,181 @@
     font-family: "Poppins", sans-serif;
 }
 
-/* Background with parallax effect */
-.parallax-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    background: linear-gradient(315deg, 
-        var(--bg-gradient-1) 3%, 
-        var(--bg-gradient-2) 38%, 
-        var(--bg-gradient-1) 68%, 
-        var(--bg-gradient-3) 98%);
-    animation: gradient var(--gradient-animation-duration) ease infinite;
-    background-size: 400% 400%;
-    transform: translateZ(0);
-    will-change: transform;
+html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Changed to allow scrolling */
+    background: linear-gradient(-45deg, #000000, #000000, #080018, #733cff);
+    background-size: 400% 400%;
+    animation: gradient var(--gradient-animation-duration) ease infinite;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-    overflow-y: auto;
-    perspective: 2px; /* Adds depth for parallax effect */
-    background: transparent; /* Remove background from body */
 }
 
-/* Container for main content */
-.container {
-    /* Container principal - controla o posicionamento geral dos elementos
-     * Para mover todo o conteúdo, ajuste as margens ou padding aqui
-     * margin: top right bottom left
-     */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-    min-height: 200vh; /* Makes the page scrollable */
-    position: relative; /* For proper z-index stacking */
-    z-index: 1; /* Keeps content above background */
-    
-    /* Ajuste a posição do container inteiro:
-     * transform: translate(X, Y);
-     * Exemplo: transform: translate(100px, -50px);
-     * X positivo = direita, X negativo = esquerda
-     * Y positivo = baixo, Y negativo = cima
-     */
-    transform: translate(
-        var(--container-position-x, 0),
-        var(--container-position-y, 0)
-    );
-}
 
 @keyframes gradient {
-    0% {
-        background-position: 0% 0%;
-    }
-    50% {
-        background-position: 100% 100%;
-    }
-    100% {
-        background-position: 0% 0%;
-    }
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
-.wave {
-    background: rgba(0, 0, 0, 0.25);
-    border-radius: 1000% 1000% 0 0;
+
+
+/* Navbar Styles */
+.navbar {
     position: fixed;
-    width: 200%;
-    height: 12em;
-    animation: wave 10s -3s linear infinite;
-    transform: translate3d(0, 0, 0);
-    opacity: 0.8;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
+    top: 1%;
+    left: 1%;
+    width: 98%;
+    height: var(--navbar-height); 
+    background: #0000003f !important; 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;  
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.002);
+    border-radius: 10px;
+    border: #ffffff17 solid 1px;
+    padding: 0 2rem;
+    z-index: 9999;
+    transition: all 0.3s ease;
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
-.wave:nth-of-type(2) {
-    bottom: -1.25em;
-    animation: wave 18s linear reverse infinite;
-    opacity: 0.8;
+.navbar:hover {
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.005);
 }
 
-.wave:nth-of-type(3) {
-    bottom: -2.5em;
-    animation: wave 20s -1s reverse infinite;
-    opacity: 0.9;
-}
-
-@keyframes wave {
-    2% {
-        transform: translateX(1);
-    }
-
-    25% {
-        transform: translateX(-25%);
-    }
-
-    50% {
-        transform: translateX(-50%);
-    }
-
-    75% {
-        transform: translateX(-25%);
-    }
-
-    100% {
-        transform: translateX(1);
-    }
-}
-
-
-/* Cards Section */
-.cards-section {
-    /* Para ajustar a posição dos cards:
-     * No HTML: <section class="cards-section" style="--cards-position-y: 40vh; --cards-position-x: 20vw">
-     * --cards-position-y: controla posição vertical (mais alto ou mais baixo)
-     * --cards-position-x: controla posição horizontal (esquerda ou direita)
-     */
-    width: 100%;
-    margin: var(--cards-position-y, 1rem) 0;
+.navbar .nav-links {
     display: flex;
-    justify-content: center;
-    transform: translateX(var(--cards-position-x, 0));
+    align-items: center;
+    gap: 2rem;
 }
+
+.navbar div[id] {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+}
+
+.navbar .nav-item {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+}
+
+.navbar div[id]::after,
+.navbar .nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.navbar div[id]:hover::after,
+.navbar .nav-item:hover::after {
+    width: 100%;
+}
+
+.navbar div[id]:hover,
+.navbar .nav-item:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+
+
+.navbar #github {
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+}
+
+.navbar #github:hover {
+    transform: scale(1.05) translateY(-3px);
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 10%;
+    position: relative;
+    z-index: 1;
+    overflow-x: hidden;
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(93, 0, 255, 0.4), rgba(150, 0, 255, 0.2));
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(150, 0, 255, 0.6), rgba(93, 0, 255, 0.4));
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+
+.cards-section {
+  width: 100%;
+  margin: var(--cards-position-y, 1rem) 0;
+  display: flex;
+  justify-content: center; /* centraliza o grupo */
+  gap: 2rem; /* distância entre os cards */
+  transform: translateX(var(--cards-position-x, 0));
+}
+
+.cards-section .card {
+  flex: 0 1 250px; /* largura base do card */
+}
+
+
 
 /* Content Sections */
 .content-section {
@@ -215,34 +247,38 @@ body {
 }
 
 .card:hover .card-inner {
-  transform: rotateY(180deg);
+    transform: rotateY(180deg);
 }
 
 .card-front,
 .card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.5rem;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    padding: 1rem;
 }
 
 .card-front {
-  background: #ffffff00;
-  color: white;
-  border: 1px solid #ffffff6a;
-  box-shadow: #ffffff07 0 0 10px 0px;
-  filter: blur(5);
+    background: rgba(255, 255, 255, 0);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    box-shadow: rgba(255, 255, 255, 0.04) 0 0 10px 0px;
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
 .card-back {
-  background: #ffffff;
-  color: rgb(0, 0, 0);
-  box-shadow: #ffffff07 0 0 10px 0px;
-  transform: rotateY(180deg);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transform: rotateY(180deg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Menu Styles */
@@ -261,6 +297,50 @@ body {
      */
     transform: translateX(var(--menu-position-x, 0));
 }
+
+
+/* Header Styles */
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+    transition: all 0.8s ease;
+}
+
+.Name-title {
+    font-size: 4.5rem;
+    margin-bottom: 1rem;
+    cursor: default;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: #fff;
+    transition: all 0.8s ease;
+    background: linear-gradient(135deg, #3c00ff 0%, #2da54d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block; /* ALTERADO: agora é block */
+    text-align: center; /* garante centralização */
+}
+
+.desc {
+    display: block;
+    margin-top: 1rem; /* distância do título */
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    color: #fff;
+    transition: all 0.8s ease;
+    text-align: center; /* centraliza o texto */
+}
+
+
+.header-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    transition: all 0.8s ease;
+}
+
 
 .menu ul {
     /* Controla o layout dos botões do menu
@@ -359,44 +439,646 @@ ul li:hover .title {
   transition-delay: 0.25s;
 }
 
+/* Full Section Styles */
+.full-section {
+    width: 100vw;
+    min-height: 100vh;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 4rem 0;
+}
+
+/* Alternating section backgrounds with angled divisions */
+#sobre-section {
+    background-color: var(--section-bg-1);
+    clip-path: polygon(0 0, 100% 3%, 100% 100%, 0 97%);
+    padding: 8rem 0;
+    position: relative;
+    z-index: 1;
+}
+
+#portfolio-section {
+    background-color: var(--section-bg-2);
+    clip-path: polygon(0 3%, 100% 0, 100% 97%, 0 100%);
+    padding: 8rem 0;
+    position: relative;
+    z-index: 2;
+    margin-top: -2rem;
+}
+
+#contato-section {
+    background-color: var(--section-bg-3);
+    clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 100%);
+    padding: 8rem 0;
+    position: relative;
+    z-index: 3;
+    margin-top: -2rem;
+}
+
+.section-content {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 2rem;
+    margin: 0 auto;
+}
+
+.section-content h2 {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+/* Modern Cards */
+.modern-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 240px);
+    grid-gap: 32px;
+    position: relative;
+    z-index: 1;
+    justify-content: center;
+    margin: 2rem auto;
+}
+
+.modern-card {
+    background-color: var(--section-bg-1);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.05),
+                0px 8px 15px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+    padding: 56px 16px 16px 16px;
+    border-radius: 15px;
+    cursor: pointer;
+    position: relative;
+    transition: box-shadow 0.25s;
+}
+
+.modern-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.015);
+}
+
+.modern-card .icon {
+    z-index: 2;
+    position: relative;
+    display: table;
+    padding: 8px;
+}
+
+.modern-card .icon::after {
+    content: '';
+    position: absolute;
+    inset: 4.5px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(2px);
+    transition: background-color 0.25s, border-color 0.25s;
+}
+
+.modern-card .icon svg {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 24px;
+    height: 24px;
+    transform: translateZ(0);
+    color: var(--text-primary);
+    transition: color 0.25s;
+}
+
+.modern-card h4 {
+    z-index: 2;
+    position: relative;
+    margin: 12px 0 4px 0;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text-primary);
+}
+
+.modern-card p {
+    z-index: 2;
+    position: relative;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.modern-card .shine {
+    border-radius: inherit;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.modern-card .shine:before {
+    content: '';
+    width: 150%;
+    padding-bottom: 150%;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    bottom: 55%;
+    filter: blur(35px);
+    opacity: 0.1;
+    transform: translateX(-50%);
+    background-image: conic-gradient(from 205deg at 50% 50%,
+        rgba(var(--primary-rgb), 0) 0deg,
+        var(--primary-color) 25deg,
+        rgba(var(--primary-rgb), 0.18) 295deg,
+        rgba(var(--primary-rgb), 0) 360deg);
+}
+
+.modern-card .background {
+    border-radius: inherit;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    -webkit-mask-image: radial-gradient(circle at 60% 5%, black 0%, black 15%, transparent 60%);
+    mask-image: radial-gradient(circle at 60% 5%, black 0%, black 15%, transparent 60%);
+}
+
+.modern-card .background .tiles {
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+.modern-card .background .tile {
+    position: absolute;
+    background-color: rgba(var(--primary-rgb), 0.05);
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    opacity: 0;
+}
+
+.modern-card:hover {
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.04),
+                0px 15px 25px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.modern-card:hover .icon::after {
+    background-color: rgba(var(--primary-rgb), 0.1);
+    border-color: rgba(var(--primary-rgb), 0.2);
+}
+
+.modern-card:hover .icon svg {
+    color: var(--primary-color);
+}
+
+.modern-card:hover .shine {
+    opacity: 1;
+    transition-duration: 0.5s;
+    transition-delay: 0s;
+}
+
+.modern-card:hover .background .tiles {
+    opacity: 1;
+    transition-delay: 0.25s;
+}
+
+/* Theme Toggle */
+.day-night {
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+}
+
+.day-night:hover {
+    opacity: 0.8;
+}
+
+.day-night input {
+    display: none;
+}
+
+.day-night input + div {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    box-shadow: inset 8px -8px 0 0 var(--text-primary);
+    transform: scale(1) rotate(-2deg);
+    transition: box-shadow 0.5s ease 0s, transform 0.4s ease 0.1s;
+}
+
+.day-night input + div:before {
+    content: '';
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: background-color 0.3s ease;
+}
+
+.day-night input:checked + div {
+    box-shadow: inset 20px -20px 0 0 var(--text-primary);
+    transform: scale(0.5) rotate(0deg);
+    transition: transform 0.3s ease 0.1s, box-shadow 0.2s ease 0s;
+}
+
+.day-night input:checked + div:before {
+    background: var(--text-primary);
+    transition: background-color 0.3s ease 0.1s;
+}
+
+/* Header Buttons */
+.header-buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+/* Submit Button with Check */
+.noselect {
+    width: 150px;
+    height: 50px;
+    background: none;
+    border: 4px solid var(--primary-color);
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 100ms;
+    position: relative;
+}
+
+.noselect span,
+.noselect svg {
+    position: absolute;
+    color: var(--text-primary);
+    fill: transparent;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.noselect:focus {
+    outline: none;
+    border: 2px solid var(--secondary-color);
+    width: 50px;
+    border-left: 4px solid var(--secondary-color);
+    border-bottom: 4px solid var(--secondary-color);
+    animation: spin 2s 500ms forwards;
+}
+
+.noselect:focus span {
+    color: transparent;
+}
+
+.noselect:focus svg {
+    animation: check 500ms 2300ms forwards;
+}
+
+/* Classe base para todos os botões */
+.btn {
+    font-family: "Poppins", sans-serif;
+    display: inline-block;
+    font-size: 1em;
+    padding: 1em 2em;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: transform ease-in 0.1s, box-shadow ease-in 0.25s, border ease-in 0.25s;
+}
+
+/* Estilo do botão padrão (bubbly) */
+.btn.bubbly {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #ffffff5e;
+}
+.btn.bubbly:hover {
+    transform: translateY(-2px);
+    border-color: #733cff;
+}
+.btn.bubbly:focus { outline: 0; }
+
+/* Estilo do botão de projeto */
+.btn.proj {
+    background: linear-gradient(90deg, var(--primary-color), #4c00ff);
+    color: var(--text-primary);
+    border: none;
+    box-shadow: 0 2px 25px rgba(169, 85, 255, 0.5);
+    transition: box-shadow 0.75s ease, transform 0.2s ease, background 0.5s ease;
+}
+.btn.proj:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 5px rgba(169, 85, 255, 0.7);
+    background: linear-gradient(90deg, #6727fb, #3e00ce);
+}
+
+/* Animações do efeito bubbly */
+.btn.bubbly:before,
+.btn.bubbly:after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 140%;
+    height: 100%;
+    left: -20%;
+    z-index: -1000;
+    transition: all ease-in-out 0.5s;
+    background-repeat: no-repeat;
+}
+
+.btn.bubbly:before {
+    display: none;
+    top: -75%;
+    background-image:
+        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
+        radial-gradient(circle, transparent 20%, var(--primary-color) 20%, transparent 30%),
+        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
+        radial-gradient(circle, transparent 10%, var(--primary-color) 15%, transparent 20%),
+        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--primary-color) 20%, transparent 20%);
+    background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+}
+
+.btn.bubbly:after {
+    display: none;
+    bottom: -75%;
+    background-image:
+        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
+        radial-gradient(circle, transparent 10%, var(--primary-color) 15%, transparent 20%),
+        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--primary-color) 20%, transparent 20%);
+    background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+}
+
+.btn.bubbly:active {
+    transform: scale(0.9);
+    background-color: #733cff;
+    box-shadow: 0 2px 25px #733cff55;
+}
+
+/* Ativa as bolhas */
+.btn.bubbly.animate:before {
+    display: block;
+    animation: topBubbles ease-in-out 0.75s forwards;
+}
+.btn.bubbly.animate:after {
+    display: block;
+    animation: bottomBubbles ease-in-out 0.75s forwards;
+}
+
+/* Keyframes */
+@keyframes topBubbles {
+    0% { background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%; }
+    50% { background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%; }
+    100% { background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%; background-size: 0 0; }
+}
+
+@keyframes bottomBubbles {
+    0% { background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%; }
+    50% { background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%; }
+    100% { background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%; background-size: 0 0; }
+}
 
 /* Cursor */
-.cursor{
-    position: relative;
-    width: 24em;
-    margin: 0 auto;
-    border-right: 2px solid rgba(255,255,255,.75);
-    font-size: 30px;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    transform: translateY(-50%);    
+.cursor {
+        display: inline-block; /* permite centralizar e respeitar o tamanho do texto */
+        position: relative;
+        width: 0; /* começa fechado e a animação vai até --text-width */
+        max-width: 20.5em; /* limite final do reveal */
+        margin: 0 auto;
+        border-right: 2px solid rgba(255,255,255,.75);
+        font-size: 1.5rem;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        color: var(--text-secondary);
 }
+
 /* Animation */
 .typewriter-animation {
-    color: #fff;
-  animation: 
-    typewriter 5s steps(50) 1s 1 normal both, 
-    blinkingCursor 500ms steps(50) infinite normal;
+        animation: 
+                typewriter var(--typing-speed, 3s) steps(45) 1s 1 normal both, 
+                blinkingCursor 300ms steps(45) infinite normal;
 }
 @keyframes typewriter {
-  from { width: 0; }
-  to { width: 100%; }
+    from { width: 0; }
+    to { width: 20.5em; }
 }
 @keyframes blinkingCursor{
-  from { border-right-color: rgba(255,255,255,.75); }
-  to { border-right-color: transparent; }
+    from { border-right-color: rgba(255,255,255,.75); }
+    to { border-right-color: transparent; }
 }
 
+/* Animações de entrada */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modern-card,
+.card,
+.section-content {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.modern-card.animate-in,
+.card.animate-in,
+.section-content.animate-in {
+    animation: slideInUp 0.6s ease-out forwards;
+}
+
+.modern-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.modern-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.modern-card:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+/* =========================
+    Aurora-on-text effect (REMOVED)
+    The aurora rules were added earlier but have been commented/removed by request.
+    To restore, re-add the original .nome-aurora rules from version history.
+    ========================= */
 
 
+.desc {
+    color: #dbdbdb;
+}
 
+h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    color: #fff;
+    position: relative;
+    padding-bottom: 1rem;
+}
 
+/* ========== RESPONSIVIDADE ========== */
 
+/* Tablets */
+@media (max-width: 768px) {
+    :root {
+        --navbar-height: 60px;
+    }
 
+    .navbar {
+        width: 95%;
+        left: 2.5%;
+        padding: 0 1rem;
+    }
 
+    .navbar .nav-links {
+        gap: 1rem;
+    }
 
+    .Name-title {
+        font-size: 3rem;
+    }
 
+    .desc {
+        font-size: 1.2rem;
+    }
 
-  
+    .header-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
 
+    .btn {
+        width: 100%;
+    }
+
+    .modern-grid {
+        grid-template-columns: repeat(1, 240px);
+    }
+
+    .cards-section {
+        flex-direction: column;
+    }
+
+    .section-content h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    :root {
+        --navbar-height: 50px;
+    }
+
+    .navbar {
+        top: 0;
+        left: 0;
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .navbar #logo .nomeTitle {
+        font-size: 1rem;
+    }
+
+    .navbar .nav-links {
+        gap: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .container {
+        padding-top: 15%;
+    }
+
+    .Name-title {
+        font-size: 2rem;
+    }
+
+    .desc {
+        font-size: 1rem;
+    }
+
+    .header-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .btn {
+        font-size: 0.9em;
+        padding: 0.8em 1.5em;
+    }
+
+    .modern-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cards-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section-content {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .section-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .rounded {
+        width: 90%;
+    }
+
+    /* Ajuste de cards em mobile */
+    .card {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+        min-height: 250px;
+    }
+}
