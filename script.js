@@ -168,3 +168,39 @@ const isDesktop = () => window.innerWidth > 768;
 // Log de informações úteis
 console.log(`%c Portfolio Marcelo V. - Carregado ✅`, 'color: #763bff; font-weight: bold; font-size: 12px;');
 console.log(`%c Dispositivo: ${isMobile() ? '📱 Mobile' : isTablet() ? '📱 Tablet' : '🖥️ Desktop'}`, 'color: #2da54d; font-size: 11px;');
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const emailBtn = document.querySelector('.copy-email-btn');
+
+    if (emailBtn) {
+        emailBtn.addEventListener('click', async () => {
+            // 1. Pega o email do atributo HTML
+            const email = emailBtn.getAttribute('data-email');
+
+            try {
+                // 2. Tenta copiar para a área de transferência
+                await navigator.clipboard.writeText(email);
+
+                // 3. Sucesso: Adiciona a classe que mostra o tooltip
+                emailBtn.classList.add('active');
+
+                // 4. Muda o ícone temporariamente para um "check" (opcional, fica legal)
+                const icon = emailBtn.querySelector('ion-icon');
+                const originalIcon = icon.getAttribute('name');
+                icon.setAttribute('name', 'checkmark-outline');
+
+                // 5. Remove a classe e volta o ícone depois de 2 segundos
+                setTimeout(() => {
+                    emailBtn.classList.remove('active');
+                    icon.setAttribute('name', originalIcon);
+                }, 2000);
+
+            } catch (err) {
+                console.error('Falha ao copiar: ', err);
+                alert('Erro ao copiar email. Copie manualmente: ' + email);
+            }
+        });
+    }
+});

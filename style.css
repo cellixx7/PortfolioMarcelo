@@ -1,10 +1,12 @@
-/* CSS Variables for easy customization */
+/* ==========================================================================
+   1. Variáveis CSS (Root)
+   ========================================================================== */
 :root {
     /* ===== Color Scheme ===== */
-    --primary-color: #763bff;
+    --primary-color: #4c00ff;
     --primary-rgb: 169, 85, 255;
-    --secondary-color: #2da54d;
-    --accent-color: #FF9966;
+    --secondary-color: #7142c9;
+    --accent-color: #3616aa;
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.7);
     --navbar-bg: rgba(17, 17, 17, 0.8);
@@ -25,9 +27,44 @@
     --gradient-animation-duration: 15s;
     --menu-transition-duration: 0.5s;
     --wave-animation-duration: 10s;
-}
 
-/* Reset and Base Styles */
+    /* ===== NOVAS VARIÁVEIS DE ANIMAÇÃO ELÁSTICA ===== */
+    --c1: #8261fb;
+    --c2: #5100ff;
+    --c3: #3f25eb;
+    --gradient: linear-gradient(
+        60deg,
+        var(--c3),
+        var(--c2),
+        var(--c1),
+        var(--c2),
+        var(--c3)
+    );
+    --scale-start: 0.9; /* Começa menor */
+    --scale-end: 1; /* Termina no tamanho normal */
+
+    /* linear easing generator: https://linear-easing-generator.netlify.app/ */
+    /* prettier-ignore */
+    --ease-elastic: linear(
+        0, 0.186 2.1%, 0.778 7.2%, 1.027 9.7%, 1.133, 1.212, 1.264, 1.292 15.4%,
+        1.296, 1.294, 1.285, 1.269 18.9%, 1.219 20.9%, 1.062 25.8%, 0.995 28.3%,
+        0.944 31.1%, 0.93, 0.921, 0.92 35.7%, 0.926, 0.94 39.7%, 1.001 47%, 1.014,
+        1.021 52.4%, 1.02 56.4%, 1 65.5%, 0.994 70.7%, 1.001 88.4%, 1
+    );
+    /* ================================================= */
+    @media (prefers-reduced-motion) {
+    :root {
+        --ease-elastic: ease-out;
+        --scale-start: var(--scale-end);
+    }
+}
+}   
+
+
+
+/* ==========================================================================
+   2. Reset e Estilos Base
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -40,31 +77,98 @@ html {
     scroll-behavior: smooth;
 }
 
+/* ==========================================================================
+   3. Animações (Keyframes)
+   ========================================================================== */
+
+@keyframes topBubbles {
+    0% { background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%; }
+    50% { background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%; }
+    100% { background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%; background-size: 0 0; }
+}
+
+@keyframes bottomBubbles {
+    0% { background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%; }
+    50% { background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%; }
+    100% { background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%; background-size: 0 0; }
+}
+
+/* NOVO: Animação slideInUp reescrita com escala para elasticidade */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        /* Adicionado escala: começa pequeno e se move para cima */
+        transform: translateY(30px) scale(var(--scale-start)); 
+    }
+    to {
+        opacity: 1;
+        /* Termina no tamanho normal (scale: 1) e na posição 0 */
+        transform: translateY(0) scale(var(--scale-end));
+    }
+}
+
+@keyframes typewriter {
+    from { width: 0; }  
+    to { width: 20.5em; }
+}
+
+@keyframes blinkingCursor{
+    from { border-right-color: rgba(255,255,255,.75); }
+    to { border-right-color: transparent; }
+}
+
+/* ==========================================================================
+   4. Layout Principal (Body, Container)
+   ========================================================================== */
 body {
-    background: linear-gradient(-45deg, #000000, #000000, #080018, #733cff);
-    background-size: 400% 400%;
-    animation: gradient var(--gradient-animation-duration) ease infinite;
+    /* Mantido o gradiente, mas sem animação. Apenas o primeiro gradiente será visível */
+    background: linear-gradient(-45deg, #000000, #17024d, #080018, #11013b);
+    
+    /* REMOVIDO: background-size: 400% 400%; */
+    /* REMOVIDO: animation: gradient var(--gradient-animation-duration) ease infinite; */
+
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    position: relative; 
+    overflow-x: hidden; 
+    z-index: 1; 
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('noisebg.jpg'); /* Substitua pela URL da sua imagem */
+    background-size: cover; /* Cobre todo o elemento */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita repetição */
+    opacity: 0.05; /* A opacidade desejada: 5% */
+    z-index: -1; /* Coloca o pseudo-elemento atrás do conteúdo do body, mas ainda por cima do background do body */
+    pointer-events: none; /* Garante que o pseudo-elemento não interfira com interações do mouse */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 15%;
+    padding-left: 2%;
+    position: relative;
+    z-index: 1;
+    /* REMOVER: overflow-x: hidden; */ 
+    /* Isso deve ser mantido apenas no <html> ou <body> */
 }
 
 
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
 
-
-
-/* Navbar Styles */
+/* ==========================================================================
+   5. Barra de Navegação (Navbar)
+   ========================================================================== */
+   
 .navbar {
     position: fixed;
     top: 1%;
@@ -98,17 +202,7 @@ body {
     gap: 2rem;
 }
 
-.navbar div[id] {
-    color: var(--text-primary);
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    font-weight: 500;
-    position: relative;
-}
-
+.navbar div[id],
 .navbar .nav-item {
     color: var(--text-primary);
     text-decoration: none;
@@ -144,8 +238,6 @@ body {
     transform: translateY(-2px);
 }
 
-
-
 .navbar #github {
     font-size: 3rem;
     display: flex;
@@ -162,193 +254,161 @@ body {
 .navbar #github:hover {
     transform: scale(1.05) translateY(-3px);
 }
-.container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 0 auto;
-    padding-top: 10%;
-    position: relative;
-    z-index: 1;
-    overflow-x: hidden;
-}
 
-
+/* ==========================================================================
+   6. Barra de Rolagem (Scrollbar)
+   ========================================================================== */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 3px;
 }
-
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #080018;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(93, 0, 255, 0.4), rgba(150, 0, 255, 0.2));
+  background: #ffffff;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  transition: all 0.6s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, rgba(150, 0, 255, 0.6), rgba(93, 0, 255, 0.4));
-  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-
-.cards-section {
-  width: 100%;
-  margin: var(--cards-position-y, 1rem) 0;
-  display: flex;
-  justify-content: center; /* centraliza o grupo */
-  gap: 2rem; /* distância entre os cards */
-  transform: translateX(var(--cards-position-x, 0));
-}
-
-.cards-section .card {
-  flex: 0 1 250px; /* largura base do card */
-}
-
-
-
-/* Content Sections */
-.content-section {
-    width: 100%;
-    min-height: 100vh;
-    margin-top: var(--section-margin, 50vh);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.section-content {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 2rem;
-    border-radius: 1rem;
-    width: 80%;
-    max-width: 1000px;
-}
-
-.card {
-    width: var(--card-width);
-    height: var(--card-height);
-    perspective: 1000px;
-    cursor: pointer;
-}
-
-.card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-}
-
-.card:hover .card-inner {
-    transform: rotateY(180deg);
-}
-
-.card-front,
-.card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.5rem;
-    padding: 1rem;
-}
-
-.card-front {
-    background: rgba(255, 255, 255, 0);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.42);
-    box-shadow: rgba(255, 255, 255, 0.04) 0 0 10px 0px;
-    font-weight: 600;
-    font-size: 1.1rem;
-}
-
-.card-back {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--text-primary);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    transform: rotateY(180deg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Menu Styles */
-/* Menu principal */
-.menu {
-    /* Para ajustar a posição vertical do menu:
-     * No HTML: <nav class="menu" style="--menu-position-y: 20vh">
-     * Valores maiores = mais para baixo
-     * Valores negativos = mais para cima
-     */
-    position: relative;
-    width: 100%;
-    margin: var(--menu-position-y, 0) 0;
-    /* Para ajustar a posição horizontal do menu:
-     * No HTML: <nav class="menu" style="--menu-position-x: 20vw">
-     */
-    transform: translateX(var(--menu-position-x, 0));
-}
-
-
-/* Header Styles */
+/* ==========================================================================
+   7. Estilos do Cabeçalho (Header e Títulos)
+   ========================================================================== */
 .header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 6rem;
+    margin-right: 500px;
     transition: all 0.8s ease;
 }
 
 .Name-title {
-    font-size: 4.5rem;
+    font-size: 4rem;
     margin-bottom: 1rem;
     cursor: default;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     font-weight: 600;
-    color: #fff;
+    color: #9c67ff;
     transition: all 0.8s ease;
-    background: linear-gradient(135deg, #3c00ff 0%, #2da54d 100%);
+    display: block;
+    text-align: center;
+    background: linear-gradient(120deg, #4c00ff, #7142c9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    display: block; /* ALTERADO: agora é block */
-    text-align: center; /* garante centralização */
+    color: transparent;
+    transition: all 0.8s ease-in-out;
+}
+
+.Name-title:hover {
+    background: linear-gradient(120deg, #6121f7, #8b5de1);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
 }
 
 .desc {
     display: block;
-    margin-top: 1rem; /* distância do título */
+    margin-top: 1rem;
     margin-bottom: 2rem;
-    font-size: 1.5rem;
-    color: #fff;
+    margin-left: auto;
+    font-size: 0.1rem;
+    color: #fffdfd; /* Usando o valor específico de .desc */
     transition: all 0.8s ease;
-    text-align: center; /* centraliza o texto */
+    text-align: center;
+}
+
+/* Estilos do Cabeçalho (Header e Títulos) */
+.header {
+    text-align: left; /* Alinha o texto à esquerda */
+    margin-bottom: 5rem;
+    /* REMOVIDO: margin-right: 500px; - Isso empurrava o header para a esquerda no layout original */
+    transition: all 0.8s ease;
+    
+    /* NOVO: Define uma largura máxima para o conteúdo da esquerda, exemplo: 40% da viewport */
+    max-width: 40vw; 
+    /* NOVO: Garante que o conteúdo comece na esquerda */
+    margin-left: 0;
+    padding-left: 2rem; /* Adiciona algum padding para não colar na borda */
+}
+
+/* Os elementos dentro do header precisam ter seu alinhamento ajustado */
+.Name-title {
+    /* ... outras propriedades mantidas ... */
+    background-clip: text;
+    display: block;
+    text-align: left; /* Alterado: garante alinhamento à esquerda */
+}
+
+
+
+.desc {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    /* REMOVIDO: margin-left: auto; - Isso ajudava a centralizar no layout anterior */
+    font-size: 1rem;
+    color: #ffffff;
+    transition: all 0.8s ease;
+    text-align: left; /* Alterado: alinha a descrição à esquerda */
 }
 
 
 .header-buttons {
     display: flex;
-    justify-content: center;
+    /* MANTIDO: justify-content: center; */
+    /* ALTERADO: Para alinhar os botões à esquerda do seu bloco. */
+    justify-content: flex-start; 
     gap: 1rem;
     transition: all 0.8s ease;
+    margin-top: 2rem;
+}
+
+.header-buttons {
+    display: flex;
+    justify-content: flex-start; /* Alinha os botões à esquerda do bloco */
+    gap: 2rem;
+    transition: all 0.8s ease;
+    margin-top: 2rem;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    color: #fff;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section-content h2 {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin-bottom: 2rem; /* Uso da regra mais específica para seção */
+    text-align: center;
+    position: relative;
+    padding-bottom: 1rem;
 }
 
 
+
+/* ==========================================================================
+   8. Estilos do Menu Principal
+   ========================================================================== */
+.menu {
+    position: relative;
+    width: 100%;
+    margin: var(--menu-position-y, 0) 0;
+    transform: translateX(var(--menu-position-x, 0));
+}
+
 .menu ul {
-    /* Controla o layout dos botões do menu
-     * gap: controla o espaço entre os botões
-     * justify-content: center = centralizado
-     * justify-content: flex-start = à esquerda
-     * justify-content: flex-end = à direita
-     */
     display: flex;
     position: relative;
     gap: var(--menu-gap);
@@ -439,12 +499,34 @@ ul li:hover .title {
   transition-delay: 0.25s;
 }
 
-/* Full Section Styles */
-.full-section {
-    width: 100vw;
+/* ==========================================================================
+   9. Estilos das Seções de Conteúdo e Grid | Profile Info + Cards
+   ========================================================================== */
+.content-section {
+    width: 100%;
     min-height: 100vh;
+    margin-top: var(--section-margin, 50vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.full-section {
+    /* CORRIGIDO: Usa 100% do PAI (que é 100% da viewport, se o pai for o body) */
+    width: 100%; 
+    min-height: 100vh;
+    
+    /* CORREÇÃO CRÍTICA: 
+       Isso força a seção a expandir para a largura total da viewport, 
+       ignorando a largura do contêiner pai. 
+       -50vw move o elemento para a borda esquerda da viewport.
+       +50% o move de volta em 50% da largura do elemento pai.
+       Isso garante que a seção ocupe a largura total, *sem* estourar o eixo X.
+    */
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -452,26 +534,97 @@ ul li:hover .title {
     padding: 4rem 0;
 }
 
-/* Alternating section backgrounds with angled divisions */
+#sobre-section,
+#portfolio-section,
+#contato-section {
+    scroll-margin-top: -100px;
+}
+
+/* Section backgrounds with angled divisions */
+/* Seção Sobre */
 #sobre-section {
-    background-color: var(--section-bg-1);
-    clip-path: polygon(0 0, 100% 3%, 100% 100%, 0 97%);
     padding: 8rem 0;
+    padding-bottom: 12rem;
     position: relative;
     z-index: 1;
 }
 
+.about-title {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin-bottom: 3rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.about-txt {
+    max-width: 850px;         /* Largura confortável, mas um pouco mais flexível */
+    margin: 0 auto;           /* Centraliza */
+    font-size: 0.7rem;       /* Tamanho ideal para leitura */
+    line-height: 1.75;        /* Respiro melhor entre linhas */
+    font-weight: 300;
+    text-align: justify;      /* Mantém leitura organizada */
+    color: #c2c2c2;          /* Cor do texto */
+}
+
+/* Negrito com destaque elegante */
+.about-txt b {
+    font-weight: 625;
+    color: inherit; /* Mantém a cor do texto ao redor */
+}
+
+/* Espaçamento entre blocos usando <br> */
+.about-txt br {
+    line-height: 2.2;
+}
+
+/* Lista do About */
+.about-txt-list {
+    margin: 1.7rem 0;
+    padding-left: 1.2rem;
+}
+
+.about-txt-list li {
+    margin-bottom: 0.7rem;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+/* Ícones opcionais (caso você queira colocar futuramente) */
+.about-txt-list li::marker {
+    color: var(--primary-color);
+}
+
+.about-a {
+    color: var(--primary-color) !important;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative; /* CRÍTICO: Para o tooltip absoluto funcionar */
+    display: inline-block;
+}
+
+.about-a:hover {
+    color: var(--secondary-color)
+}
+
+.about-a:hover > .default-tooltip {
+    opacity: 1;
+    visibility: visible;
+    bottom: -45px; /* Movimento de deslize sutil */
+}
+
 #portfolio-section {
-    background-color: var(--section-bg-2);
+    background-color: transparent;
     clip-path: polygon(0 3%, 100% 0, 100% 97%, 0 100%);
     padding: 8rem 0;
     position: relative;
     z-index: 2;
-    margin-top: -2rem;
+    margin-top: -1rem;
 }
 
 #contato-section {
-    background-color: var(--section-bg-3);
+    background-color: transparent;
     clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 100%);
     padding: 8rem 0;
     position: relative;
@@ -480,33 +633,29 @@ ul li:hover .title {
 }
 
 .section-content {
+    background: rgba(0, 0, 0, 0.139);
+    backdrop-filter: blur(10px);
+    border: #ffffff17 solid 1px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+    /* Layout */
     width: 100%;
     max-width: 1200px;
-    padding: 0 2rem;
-    margin: 0 auto;
+    padding: 2rem;
+    margin: 5rem auto;
+
+    /* Estética */
+    border-radius: 1rem;
+
+    /* Animação */
+    opacity: 0;
+    transform: translateY(20px);
 }
 
-.section-content h2 {
-    font-size: 2.5rem;
-    color: var(--text-primary);
-    margin-bottom: 2rem;
-    text-align: center;
-    position: relative;
-    padding-bottom: 1rem;
+.section-content.animate-in {
+    animation: slideInUp 0.9s var(--ease-elastic) forwards;
 }
 
-.section-content h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-}
-
-/* Modern Cards */
 .modern-grid {
     display: grid;
     grid-template-columns: repeat(2, 240px);
@@ -517,6 +666,236 @@ ul li:hover .title {
     margin: 2rem auto;
 }
 
+
+/* ==========================================================================
+   PROFILE CARD (SIDEBAR)
+   ========================================================================== */
+
+/* Posicionamento do container do card na tela */
+.profile-sidebar {
+    position: absolute; /* Fixa na tela */
+    right: 5%;      /* Distância da borda direita */
+    top: 28%;       /* Centraliza verticalmente */
+    z-index: 100;   /* Garante que fique acima das seções */
+    display: block;
+}
+
+/* O Cartão Quadrado */
+.profile-card {
+    width: 450px;   /* Tamanho do quadrado */
+    height: 450px;
+    position: relative;
+    border-radius: 15px; /* Bordas levemente arredondadas */
+    overflow: hidden;    /* Garante que nada saia do quadrado */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 2px solid #fff;
+    transition: transform 0.3s ease;
+}
+
+/* Efeito de hover no card inteiro (opcional: leve zoom) */
+.profile-card:hover {
+    transform: scale(1.02);
+    border-color: var(--primary-color);
+}
+
+/* Estilo da Imagem */
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem preencha o quadrado sem distorcer */
+    display: block;
+    transition: filter 0.3s ease;
+}
+
+/* O Overlay (Camada escura com ícones) */
+.social-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 15, 15, 0.85); /* Fundo escuro semi-transparente */
+    backdrop-filter: blur(6px); /* Efeito de vidro embaçado */
+    display: flex;
+    justify-content: center; /* Centraliza ícones horizontalmente */
+    align-items: center;     /* Centraliza ícones verticalmente */
+    gap: 1.5rem;             /* Espaço entre os ícones */
+    opacity: 0;              /* Invisível por padrão */
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* A Mágica: Mostra o overlay quando passa o mouse no card */
+.profile-card:hover .social-overlay {
+    opacity: 1;
+}
+
+/* Estilo dos Ícones */
+.social-icon {
+    color: #ffffff;
+    font-size: 1.8rem;
+    transition: transform 0.2s ease, color 0.2s ease;
+    display: flex; /* Remove comportamentos estranhos de links */
+}
+
+/* Hover específico nos ícones */
+.social-icon:hover {
+    color: var(--primary-color); /* Cor de destaque (ajuste para sua paleta) */
+    transform: translateY(-5px); /* Ícone sobe levemente */
+}
+
+/* Configuração base para o texto que aparece no hover */
+.social-icon::after {
+    content: attr(data-label); /* Pega o texto do HTML automaticamente */
+    position: absolute;
+    bottom: -40px; /* Posiciona abaixo do ícone */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px); /* Começa um pouco mais baixo */
+    
+    /* Estilo do Texto */
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.75rem; /* Letra pequena e elegante */
+    font-family: 'Poppins', sans-serif;
+    white-space: nowrap; /* Impede que o texto quebre linha */
+    pointer-events: none; /* O mouse ignora o texto */
+    
+    /* Animação */
+    opacity: 0;
+    transition: all 0.3s ease;
+    visibility: hidden;
+}
+
+/* Estilo específico para o botão de copiar */
+.copy-email-btn {
+    cursor: pointer;
+    position: relative; /* Necessário para posicionar o tooltip */
+}
+
+/* O balãozinho (Tooltip) */
+.copy-tooltip {
+    position: absolute;
+    bottom: -35px; /* Aparece embaixo do ícone */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #00d2ff; /* Mesma cor do hover */
+    color: #000;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    white-space: nowrap;
+    opacity: 0;           /* Invisível por padrão */
+    visibility: hidden;   /* Invisível por padrão */
+    transition: all 0.3s ease;
+    pointer-events: none; /* Não interfere no clique */
+}
+
+/* Setinha do balão (Opcional - detalhe estético) */
+.copy-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 5px 5px 5px;
+    border-style: solid;
+    border-color: transparent transparent #00d2ff transparent;
+}
+
+/* Classe que o JS vai adicionar para mostrar o balão */
+.copy-email-btn.active .copy-tooltip {
+    opacity: 1;
+    visibility: visible;
+    bottom: -45px; /* Pequeno movimento para baixo na animação */
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+   ========================================================================== */
+@media (max-width: 1100px) {
+    /* Esconde o card lateral em telas menores ou tablets 
+       para não cobrir o texto */
+    .profile-sidebar {
+        display: none; 
+        /* Alternativa: Mover para o topo ou rodapé se preferir não esconder */
+    }
+}
+
+/* ==========================================================================
+   10. Estilos de Cards
+   ========================================================================== */
+.card {
+    width: var(--card-width);
+    height: var(--card-height);
+    perspective: 1000px;
+    cursor: pointer;
+    opacity: 0; /* Animação */
+    transform: translateY(20px); /* Animação */
+}
+
+.card.animate-in {
+    animation: slideInUp 0.9s var(--ease-elastic) forwards;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.card-front {
+    background: rgba(255, 255, 255, 0);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    box-shadow: rgba(255, 255, 255, 0.04) 0 0 10px 0px;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.card-back {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transform: rotateY(180deg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cards-section {
+  width: 100%;
+  margin: var(--cards-position-y, 1rem) 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  transform: translateX(var(--cards-position-x, 0));
+}
+
+.cards-section .card {
+  flex: 0 1 250px;
+}
+
+/* Modern Cards */
 .modern-card {
     background-color: var(--section-bg-1);
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.05),
@@ -527,6 +906,24 @@ ul li:hover .title {
     cursor: pointer;
     position: relative;
     transition: box-shadow 0.25s;
+    opacity: 0; /* Animação */
+    transform: translateY(20px); /* Animação */
+}
+
+.modern-card.animate-in {
+    animation: slideInUp 0.6s ease-out forwards;
+}
+
+.modern-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.modern-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.modern-card:nth-child(4) {
+    animation-delay: 0.3s;
 }
 
 .modern-card::before {
@@ -661,62 +1058,76 @@ ul li:hover .title {
     transition-delay: 0.25s;
 }
 
-/* Theme Toggle */
-.day-night {
+
+/* ==========================================================================
+   11. Estilos de Botões e Componentes de UI
+   ========================================================================== */
+/* Botão Base */
+.btn {
+    font-family: "Poppins", sans-serif;
+    display: inline-block;
+    font-size: 1em;
+    padding: 1em 2em;
+    border-radius: 10px;
     cursor: pointer;
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    opacity: 0.3;
-    transition: opacity 0.3s ease;
-}
-
-.day-night:hover {
-    opacity: 0.8;
-}
-
-.day-night input {
-    display: none;
-}
-
-.day-night input + div {
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
     position: relative;
-    box-shadow: inset 8px -8px 0 0 var(--text-primary);
-    transform: scale(1) rotate(-2deg);
-    transition: box-shadow 0.5s ease 0s, transform 0.4s ease 0.1s;
+    transition: transform ease-in 0.1s, box-shadow ease-in 0.25s, border ease-in 0.25s;
 }
 
-.day-night input + div:before {
-    content: '';
-    width: inherit;
-    height: inherit;
-    border-radius: inherit;
+/* Botão Bubbly */
+.btn.bubbly {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #ffffff5e;
+}
+.btn.bubbly:hover {
+    transform: translateY(-2px);
+    border-color: var(--secondary-color);
+}
+.btn.bubbly:focus { outline: 0; }
+
+.btn.bubbly:before,
+.btn.bubbly:after {
     position: absolute;
-    left: 0;
-    top: 0;
-    transition: background-color 0.3s ease;
+    content: '';
+    display: block;
+    width: 140%;
+    height: 100%;
+    left: -20%;
+    z-index: -1000;
+    transition: all ease-in-out 0.5s;
+    background-repeat: no-repeat;
+    display: none; /* Inicia escondido */
 }
 
-.day-night input:checked + div {
-    box-shadow: inset 20px -20px 0 0 var(--text-primary);
-    transform: scale(0.5) rotate(0deg);
-    transition: transform 0.3s ease 0.1s, box-shadow 0.2s ease 0s;
+
+.btn.bubbly:active {
+    transform: scale(0.9);
+    background-color: var(--primary-color);
 }
 
-.day-night input:checked + div:before {
-    background: var(--text-primary);
-    transition: background-color 0.3s ease 0.1s;
+/* Ativação das bolhas */
+.btn.bubbly.animate:before {
+    display: block;
+    animation: topBubbles ease-in-out 0.75s forwards;
+}
+.btn.bubbly.animate:after {
+    display: block;
+    animation: bottomBubbles ease-in-out 0.75s forwards;
 }
 
-/* Header Buttons */
-.header-buttons {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    margin-top: 2rem;
+/* Botão Projeto */
+.btn.proj {
+    background: var(--primary-color);
+    color: var(--text-primary);
+    border: none;
+    box-shadow: 0 2px 10px rgba(170, 85, 255, 0.239);
+    transition: box-shadow 0.75s ease, transform 0.2s ease, background 0.5s ease;
+}
+.btn.proj:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 25px rgba(170, 85, 255, 0.307);
+    background: var(--secondary-color);
 }
 
 /* Submit Button with Check */
@@ -761,205 +1172,28 @@ ul li:hover .title {
     animation: check 500ms 2300ms forwards;
 }
 
-/* Classe base para todos os botões */
-.btn {
-    font-family: "Poppins", sans-serif;
-    display: inline-block;
-    font-size: 1em;
-    padding: 1em 2em;
-    border-radius: 10px;
-    cursor: pointer;
-    position: relative;
-    transition: transform ease-in 0.1s, box-shadow ease-in 0.25s, border ease-in 0.25s;
-}
-
-/* Estilo do botão padrão (bubbly) */
-.btn.bubbly {
-    background-color: transparent;
-    color: #fff;
-    border: 2px solid #ffffff5e;
-}
-.btn.bubbly:hover {
-    transform: translateY(-2px);
-    border-color: #733cff;
-}
-.btn.bubbly:focus { outline: 0; }
-
-/* Estilo do botão de projeto */
-.btn.proj {
-    background: linear-gradient(90deg, var(--primary-color), #4c00ff);
-    color: var(--text-primary);
-    border: none;
-    box-shadow: 0 2px 25px rgba(169, 85, 255, 0.5);
-    transition: box-shadow 0.75s ease, transform 0.2s ease, background 0.5s ease;
-}
-.btn.proj:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 5px rgba(169, 85, 255, 0.7);
-    background: linear-gradient(90deg, #6727fb, #3e00ce);
-}
-
-/* Animações do efeito bubbly */
-.btn.bubbly:before,
-.btn.bubbly:after {
-    position: absolute;
-    content: '';
-    display: block;
-    width: 140%;
-    height: 100%;
-    left: -20%;
-    z-index: -1000;
-    transition: all ease-in-out 0.5s;
-    background-repeat: no-repeat;
-}
-
-.btn.bubbly:before {
-    display: none;
-    top: -75%;
-    background-image:
-        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
-        radial-gradient(circle, transparent 20%, var(--primary-color) 20%, transparent 30%),
-        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
-        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
-        radial-gradient(circle, transparent 10%, var(--primary-color) 15%, transparent 20%),
-        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
-        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
-        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
-        radial-gradient(circle, var(--primary-color) 20%, transparent 20%);
-    background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
-}
-
-.btn.bubbly:after {
-    display: none;
-    bottom: -75%;
-    background-image:
-        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
-        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
-        radial-gradient(circle, transparent 10%, var(--primary-color) 15%, transparent 20%),
-        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
-        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
-        radial-gradient(circle, var(--primary-color) 20%, transparent 20%),
-        radial-gradient(circle, var(--primary-color) 20%, transparent 20%);
-    background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
-}
-
-.btn.bubbly:active {
-    transform: scale(0.9);
-    background-color: #733cff;
-    box-shadow: 0 2px 25px #733cff55;
-}
-
-/* Ativa as bolhas */
-.btn.bubbly.animate:before {
-    display: block;
-    animation: topBubbles ease-in-out 0.75s forwards;
-}
-.btn.bubbly.animate:after {
-    display: block;
-    animation: bottomBubbles ease-in-out 0.75s forwards;
-}
-
-/* Keyframes */
-@keyframes topBubbles {
-    0% { background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%; }
-    50% { background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%; }
-    100% { background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%; background-size: 0 0; }
-}
-
-@keyframes bottomBubbles {
-    0% { background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%; }
-    50% { background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%; }
-    100% { background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%; background-size: 0 0; }
-}
-
-/* Cursor */
+/* ==========================================================================
+   12. Tipografia e Efeitos de Texto
+   ========================================================================== */
 .cursor {
-        display: inline-block; /* permite centralizar e respeitar o tamanho do texto */
-        position: relative;
-        width: 0; /* começa fechado e a animação vai até --text-width */
-        max-width: 20.5em; /* limite final do reveal */
-        margin: 0 auto;
-        border-right: 2px solid rgba(255,255,255,.75);
-        font-size: 1.5rem;
-        text-align: center;
-        white-space: nowrap;
-        overflow: hidden;
-        color: var(--text-secondary);
-}
-
-/* Animation */
-.typewriter-animation {
-        animation: 
-                typewriter var(--typing-speed, 3s) steps(45) 1s 1 normal both, 
-                blinkingCursor 300ms steps(45) infinite normal;
-}
-@keyframes typewriter {
-    from { width: 0; }
-    to { width: 20.5em; }
-}
-@keyframes blinkingCursor{
-    from { border-right-color: rgba(255,255,255,.75); }
-    to { border-right-color: transparent; }
-}
-
-/* Animações de entrada */
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.modern-card,
-.card,
-.section-content {
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-.modern-card.animate-in,
-.card.animate-in,
-.section-content.animate-in {
-    animation: slideInUp 0.6s ease-out forwards;
-}
-
-.modern-card:nth-child(2) {
-    animation-delay: 0.1s;
-}
-
-.modern-card:nth-child(3) {
-    animation-delay: 0.2s;
-}
-
-.modern-card:nth-child(4) {
-    animation-delay: 0.3s;
-}
-
-/* =========================
-    Aurora-on-text effect (REMOVED)
-    The aurora rules were added earlier but have been commented/removed by request.
-    To restore, re-add the original .nome-aurora rules from version history.
-    ========================= */
-
-
-.desc {
-    color: #dbdbdb;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 3rem;
-    font-size: 2.5rem;
-    color: #fff;
+    display: inline-block;
     position: relative;
-    padding-bottom: 1rem;
+    width: 0;
+    max-width: 20.5em;
+    margin: 0 auto;
+    border-right: 2px solid rgba(255,255,255,.75);
+    font-size: 1.5rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    color: var(--text-secondary);
 }
 
-/* ========== RESPONSIVIDADE ========== */
+
+
+/* ==========================================================================
+   13. Responsividade (Media Queries)
+   ========================================================================== */
 
 /* Tablets */
 @media (max-width: 768px) {
@@ -1081,4 +1315,53 @@ h2 {
         height: auto;
         min-height: 250px;
     }
+}
+
+/* ==========================================================================
+   14. TOOLS E ANIMAÇÕES GERAIS
+   ========================================================================== */
+
+   /* Base do Tooltip (Posicionamento e Estética) */
+.default-tooltip {
+    /* Herda o posicionamento do pai que deve ter position: relative */
+    position: absolute;
+    bottom: -35px; /* Posição inicial (ajuste conforme seu design) */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Estética */
+    background-color: #3c00ff; /* Usando sua variável para coerência */
+    color: #fff;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: #00000080 0px 4px 12px;
+
+    /* Animação e Visibilidade */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* Setinha do Tooltip */
+.default-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 5px 5px 5px;
+    border-style: solid;
+    /* Ajuste a cor da borda para a mesma cor do background do tooltip */
+    border-color: transparent transparent var(--primary-color) transparent;
+}
+
+/* REGRA DE HOVER: O tooltip aparece quando o PAI (ex: .social-icon) é hoverado */
+.social-icon:hover > .default-tooltip {
+    opacity: 1;
+    visibility: visible;
+    bottom: -45px; /* Movimento de deslize sutil */
 }
