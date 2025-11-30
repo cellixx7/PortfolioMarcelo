@@ -255,6 +255,12 @@ body::before {
     transform: scale(1.05) translateY(-3px);
 }
 
+.nomeTitle {
+    text-decoration: none; /* remove underline */
+    color: inherit;        /* herda a cor do contêiner ou navbar */
+    cursor: pointer;       /* indica que é clicável */
+}
+
 /* ==========================================================================
    6. Barra de Rolagem (Scrollbar)
    ========================================================================== */
@@ -1435,6 +1441,7 @@ ul li:hover .title {
     .navbar #logo .nomeTitle {
         font-size: 1rem;
     }
+
 
     .navbar .nav-links {
         gap: 0.5rem;
