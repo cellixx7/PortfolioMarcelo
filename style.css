@@ -632,6 +632,50 @@ ul li:hover .title {
     margin-top: -2rem;
 }
 
+.contato-box {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.contato-sub {
+    font-size: 1.2rem;
+    margin: 1rem auto 2.5rem;
+    max-width: 600px;
+    color: var(--text-secondary);
+}
+
+.contato-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.contato-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.9rem 1.4rem;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(6px);
+    transition: 0.25s ease;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.contato-item:hover {
+    background: rgba(255,255,255,0.18);
+    transform: translateY(-2px);
+}
+
+.contato-item i {
+    font-size: 1.3rem;
+}
+
+
+
 .section-content {
     background: rgba(0, 0, 0, 0.139);
     backdrop-filter: blur(10px);
@@ -1171,6 +1215,140 @@ ul li:hover .title {
 .noselect:focus svg {
     animation: check 500ms 2300ms forwards;
 }
+
+/* ==========================================================================
+   11.1 Animações de Botões
+   ========================================================================== */
+
+   /* Fundo escuro + blur */
+.contact-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: .3s ease;
+    z-index: 9999;
+}
+
+.contact-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Modal */
+.contact-modal {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(15px);
+    padding: 2rem 2.5rem;
+    border-radius: 1rem;
+    width: 90%;
+    max-width: 500px;
+    color: white;
+    transform: translateY(25px);
+    opacity: 0;
+    transition: .35s ease;
+    position: relative;
+}
+
+.contact-overlay.active .contact-modal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Botão fechar */
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: white;
+}
+
+/* ==========================================================================
+   11.2 Modal Formulário de Contato
+   ========================================================================== */
+
+.contact-container {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-container h2 {
+    margin-bottom: .5rem;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* Labels */
+.contact-container label {
+    font-size: .9rem;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: .2rem;
+}
+
+/* Inputs */
+.contact-container input,
+.contact-container textarea {
+    width: 100%;
+    padding: .9rem 1rem;
+    border-radius: .6rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    color: #fff;
+    font-size: .95rem;
+    transition: .2s ease;
+}
+
+.contact-container input:focus,
+.contact-container textarea:focus {
+    border-color: #763bff;
+    outline: none;
+    background: rgba(255,255,255,0.12);
+}
+
+/* Botão */
+.contact-container button {
+    width: 100%;
+    padding: .9rem;
+    border: none;
+    border-radius: .6rem;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.contact-container button:hover {
+    transform: translateY(-2px);
+    opacity: .9;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #fff;
+    z-index: 10;
+}
+
 
 /* ==========================================================================
    12. Tipografia e Efeitos de Texto

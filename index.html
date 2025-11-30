@@ -12,188 +12,272 @@
 </head>
 
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div id="logo">
-            <p class="nomeTitle">Marcelo V.</p>
-        </div>
+<!-- Navbar -->
+<nav class="navbar">
+    <div id="logo">
+        <p class="nomeTitle">Marcelo V.</p>
+    </div>
 
-        <div class="nav-links">
-            <div class="nav-item" data-section="sobre-section">Sobre</div>
-            <div class="nav-item" data-section="portfolio-section">Projetos</div>
-            <div class="nav-item" data-section="skills-section">Habilidades</div>
-            <div class="nav-item" data-section="contato-section">Contato</div>
-            <div id="github" class="nav-item">
-                <ion-icon name="logo-github" href="https://github.com/cellixx7"></ion-icon>
-            </div>
-        </div>
-    </nav>
-
-
-    <!-- Conteúdo principal -->
-    <main class="container">
-        <header class="header">
-            <h1 class="Name-title">Oi, eu sou <b2>Marcelo Vaz</b2></h1>
-            <p class="desc">
-                Estudante de Sistemas de Informação e Desenvolvedor Fullstack focado em criar soluções web modernas e eficientes.
-            </p>
-
-            <div class="header-buttons">
-                <button class="btn bubbly" data-section="contato-section">
-                    Entre em contato
-                </button>
-                <button class="btn bubbly proj" data-section="portfolio-section">
-                    Meus projetos
-                </button>
-            </div>
-        </header>
-
-        <!-- Profile SideBar -->
-<aside class="profile-sidebar">
-    <div class="profile-card">
-        <img src="src/pfp.jpeg" alt="Foto de Perfil do Marcelo" class="profile-img">
-        
-        <div class="social-overlay">
-            <a href="https://github.com/cellixx7" target="_blank" class="social-icon" data-label="github.com/cellixx7">
-                <ion-icon name="logo-github"></ion-icon>
-                <span class="default-tooltip">Visualizar Github</span>
-            </a>
-
-            <a href="https://www.linkedin.com/in/cellixx7/" target="_blank" class="social-icon" data-label="LinkedIn: Marcelo Vaz">
-                <ion-icon name="logo-linkedin"></ion-icon>
-                <span class="default-tooltip">Visualizar LinkedIn</span>
-            </a>
-
-            <a href="https://instagram.com/cellixx7" target="_blank" class="social-icon" data-label="@cellixx7">
-                <ion-icon name="logo-instagram"></ion-icon>
-                <span class="default-tooltip">Visualizar Instagram</span>
-            </a>
-
-            <div class="social-icon copy-email-btn" data-email="marcelovaz.contato@gmail.com" data-label="Clique para copiar">
-                <ion-icon name="mail-outline"></ion-icon>
-                <span class="default-tooltip">Copiar Email</span>
-                <span class="copy-tooltip">Copiado!</span>
-            </div>
-
-            <a href="https://www.behance.net/cellixx7" target="_blank" class="social-icon" data-label="Portfólio Behance">
-                <ion-icon name="logo-behance"></ion-icon>
-                <span class="default-tooltip">Visualizar Behance</span>
-            </a>    
+    <div class="nav-links">
+        <div class="nav-item" data-section="sobre-section">Sobre</div>
+        <div class="nav-item" data-section="portfolio-section">Projetos</div>
+        <div class="nav-item" data-section="skills-section">Habilidades</div>
+        <div class="nav-item" data-section="contato-section">Contato</div>
+        <div id="github" class="nav-item">
+            <ion-icon name="logo-github" href="https://github.com/cellixx7"></ion-icon>
         </div>
     </div>
-</aside>
+</nav>
 
-    </main>
 
-        <!-- SOBRE -->
-        <section id="sobre-section" class="full-section">
-            <div class="section-content">
-                <h2 class="about-title">SOBRE MIM</h2>
-                <div class="about-grid">
-                    <div class="about-text">
-                        <p class="about-txt">
-    Sou estudante de <b>Sistema de Informação na UNIEURO</b>, com previsão de <b>conclusão em 2028</b>. Tenho 21 anos, sou de Brasília e estou desenvolvendo minha carreira como <b>desenvolvedor FullStack</b>. <br><br>
+<!-- Conteúdo principal -->
+<main class="container">
+    <header class="header">
+        <h1 class="Name-title">
+            <a href="#sobre-section">Oi, eu sou <b2>Marcelo Vaz</b2></a>
+        </h1>
 
-    Atuo com design gráfico desde 2019(como freelancer), o que me permite criar interfaces funcionais e visualmente consistentes. Essa experiência fortalece meu trabalho em front-end e me ajuda a unir estética, acessibilidade e boa experiência do usuário. <br><br>
+        <p class="desc">
+            Estudante de Sistemas de Informação e Desenvolvedor Fullstack focado em criar soluções web modernas e
+            eficientes.
+        </p>
 
-    Além do meu projeto pessoal <b>MyMus</b>, onde aplico conceitos práticos de front-end, back-end e arquitetura de software, também desenvolvi diversos projetos acadêmicos que ampliam minha visão técnica: <br><br>
+        <div class="header-buttons">
+            <button class="btn bubbly" id="open-contact">
+                Entre em contato
+            </button>
 
-    • <b>Banco de Dados para Ecommerce</b> – Criação completa da modelagem de um ecommerce especializado em vendas de peças e periféricos de computador, incluindo entidades, relacionamentos, normalização e regras de negócio. <br>
+            <div id="contact-overlay" class="contact-overlay">
+                <div class="contact-container">
+                    <form id="contact-form">
+                        <h2>Fale comigo</h2>
 
-    • <b>Projeto em Java</b> – Desenvolvimento de um sistema acadêmico utilizando Java, focado em lógica, organização de código, padrões e boas práticas. <br>
+                        <button id="close-contact" class="close-modal">&times;</button>
 
-    • <b>Projeto Integrador – Clínica Hospitalar</b> – Atuação na parte de medicamentos, criando e gerenciando o banco de dados, configurando tabelas, relações, integridade e estrutura para manipulação de informações sensíveis. <br>
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" name="user_name" placeholder="Seu nome" required>
 
-    • <b>Portal do Aluno – UNISER</b> – Desenvolvimento full stack de um portal acadêmico voltado para universitários idosos. O projeto envolve modernização de front-end, back-end e parte da camada de banco de dados, com foco em acessibilidade, navegação simplificada e fluxo de uso otimizado para idosos. Trabalho diretamente com <b>TypeScript, Node.js, React.js, SQL e Prisma ORM</b>, realizando a implementação de rotas, validações, lógica de negócio, integração entre serviços e melhorias contínuas na interface. <br><br>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="user_email" placeholder="seuemail@exemplo.com" required>
 
-    Gosto de aprender de forma prática, resolvendo problemas reais e evoluindo a cada projeto. Tenho interesse especial em desenvolvimento web, UX, APIs, lógica de programação e construção de aplicações completas e escaláveis.
-    <br><br> Veja mais sobre meus 
-<a href="#portfolio-section" class="about-a">
-    <b>PROJETOS</b>
-    <span class="default-tooltip">Veja todos os projetos</span>
-</a>, minhas 
-<a href="#skills-section" class="about-a">
-    <b>HABILIDADES</b>
-    <span class="default-tooltip">Minhas stacks e proficiência</span>
-</a> e 
-<a href="#contato-section" class="about-a">
-<b>CONTATO</b>
-<span class="default-tooltip">Entre em contato!</span>
-</a>!
-</p>
-</p>
+                        <label for="subject">Assunto</label>
+                        <input type="text" id="subject" name="user_subject" placeholder="Opcional">
 
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" name="user_message" rows="5" placeholder="Digite sua mensagem..."
+                            required></textarea>
+
+                        <button type="submit" class="btn bubbly">Enviar</button>
+                    </form>
+                </div>
+            </div>
+
+            <button class="btn bubbly proj" data-section="portfolio-section">
+                Meus projetos
+            </button>
+        </div>
+    </header>
+
+    <!-- Profile SideBar -->
+    <aside class="profile-sidebar">
+        <div class="profile-card">
+            <img src="src/pfp.jpeg" alt="Foto de Perfil do Marcelo" class="profile-img">
+
+            <div class="social-overlay">
+                <a href="https://github.com/cellixx7" target="_blank" class="social-icon"
+                    data-label="github.com/cellixx7">
+                    <ion-icon name="logo-github"></ion-icon>
+                    <span class="default-tooltip">Visualizar Github</span>
+                </a>
+
+                <a href="https://www.linkedin.com/in/cellixx7/" target="_blank" class="social-icon"
+                    data-label="LinkedIn: Marcelo Vaz">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                    <span class="default-tooltip">Visualizar LinkedIn</span>
+                </a>
+
+                <a href="https://instagram.com/cellixx7" target="_blank" class="social-icon" data-label="@cellixx7">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                    <span class="default-tooltip">Visualizar Instagram</span>
+                </a>
+
+                <div class="social-icon copy-email-btn" data-email="marcelovaz.contato@gmail.com"
+                    data-label="Clique para copiar">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    <span class="default-tooltip">Copiar Email</span>
+                    <span class="copy-tooltip">Copiado!</span>
+                </div>
+
+                <a href="https://www.behance.net/cellixx7" target="_blank" class="social-icon"
+                    data-label="Portfólio Behance">
+                    <ion-icon name="logo-behance"></ion-icon>
+                    <span class="default-tooltip">Visualizar Behance</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+</main>
+
+<!-- SOBRE -->
+<section id="sobre-section" class="full-section">
+    <div class="section-content">
+        <h2 class="about-title">SOBRE MIM</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p class="about-txt">
+                    Sou estudante de <b>Sistema de Informação na UNIEURO</b>, com previsão de <b>conclusão em 2028</b>.
+                    Tenho 21 anos, sou de Brasília e estou desenvolvendo minha carreira como <b>desenvolvedor
+                        FullStack</b>. <br><br>
+
+                    Atuo com design gráfico desde 2019(como freelancer), o que me permite criar interfaces funcionais e
+                    visualmente consistentes. Essa experiência fortalece meu trabalho em front-end e me ajuda a unir
+                    estética, acessibilidade e boa experiência do usuário. <br><br>
+
+                    Além do meu projeto pessoal <b>MyMus</b>, onde aplico conceitos práticos de front-end, back-end e
+                    arquitetura de software, também desenvolvi diversos projetos acadêmicos que ampliam minha visão
+                    técnica: <br><br>
+
+                    • <b>Banco de Dados para Ecommerce</b> – Criação completa da modelagem de um ecommerce especializado
+                    em vendas de peças e periféricos de computador, incluindo entidades, relacionamentos, normalização e
+                    regras de negócio. <br>
+
+                    • <b>Projeto em Java</b> – Desenvolvimento de um sistema acadêmico utilizando Java, focado em
+                    lógica, organização de código, padrões e boas práticas. <br>
+
+                    • <b>Projeto Integrador – Clínica Hospitalar</b> – Atuação na parte de medicamentos, criando e
+                    gerenciando o banco de dados, configurando tabelas, relações, integridade e estrutura para
+                    manipulação de informações sensíveis. <br>
+
+                    • <b>Portal do Aluno – UNISER</b> – Desenvolvimento full stack de um portal acadêmico voltado para
+                    universitários idosos. O projeto envolve modernização de front-end, back-end e parte da camada de
+                    banco de dados, com foco em acessibilidade, navegação simplificada e fluxo de uso otimizado para
+                    idosos. Trabalho diretamente com <b>TypeScript, Node.js, React.js, SQL e Prisma ORM</b>, realizando
+                    a implementação de rotas, validações, lógica de negócio, integração entre serviços e melhorias
+                    contínuas na interface. <br><br>
+
+                    Gosto de aprender de forma prática, resolvendo problemas reais e evoluindo a cada projeto. Tenho
+                    interesse especial em desenvolvimento web, UX, APIs, lógica de programação e construção de
+                    aplicações completas e escaláveis.
+                    <br><br> Veja mais sobre meus
+                    <a href="#portfolio-section" class="about-a">
+                        <b>PROJETOS</b>
+                        <span class="default-tooltip">Veja todos os projetos</span>
+                    </a>, minhas
+                    <a href="#skills-section" class="about-a">
+                        <b>HABILIDADES</b>
+                        <span class="default-tooltip">Minhas stacks e proficiência</span>
+                    </a> e
+                    <a href="#contato-section" class="about-a">
+                        <b>CONTATO</b>
+                        <span class="default-tooltip">Entre em contato!</span>
+                    </a>!
+                </p>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- PROJETOS -->
+<section id="portfolio-section" class="full-section">
+    <div class="section-content">
+        <h2>Projetos</h2>
+        <div class="modern-grid">
+            <div class="modern-card">
+                <h4>Projeto 1</h4>
+                <p>Exemplo de projeto com tecnologias modernas.</p>
+            </div>
+            <div class="modern-card">
+                <h4>Projeto 2</h4>
+                <p>Outro projeto com design responsivo e interativo.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- HABILIDADES -->
+<section id="skills-section" class="full-section">
+    <div class="section-content">
+        <h2>Habilidades</h2>
+        <div class="cards-section">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">HTML, CSS & JS</div>
+                    <div class="card-back">
+                        <p class="CardDesc">Criação de interfaces modernas e responsivas.</p>
                     </div>
                 </div>
             </div>
-        </section>
-
-
-        <!-- PROJETOS -->
-        <section id="portfolio-section" class="full-section">
-            <div class="section-content">
-                <h2>Projetos</h2>
-                <div class="modern-grid">
-                    <div class="modern-card">
-                        <h4>Projeto 1</h4>
-                        <p>Exemplo de projeto com tecnologias modernas.</p>
-                    </div>
-                    <div class="modern-card">
-                        <h4>Projeto 2</h4>
-                        <p>Outro projeto com design responsivo e interativo.</p>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">Python</div>
+                    <div class="card-back">
+                        <p class="CardDesc">Automação e desenvolvimento backend.</p>
                     </div>
                 </div>
             </div>
-        </section>
-
-
-        <!-- HABILIDADES -->
-        <section id="skills-section" class="full-section">
-            <div class="section-content">
-                <h2>Habilidades</h2>
-                <div class="cards-section">
-                    <div class="card">
-                        <div class="card-inner">
-                            <div class="card-front">HTML, CSS & JS</div>
-                            <div class="card-back">
-                                <p class="CardDesc">Criação de interfaces modernas e responsivas.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-inner">
-                            <div class="card-front">Python</div>
-                            <div class="card-back">
-                                <p class="CardDesc">Automação e desenvolvimento backend.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-inner">
-                            <div class="card-front">MySQL</div>
-                            <div class="card-back">
-                                <p class="CardDesc">Gerenciamento de bancos de dados relacionais.</p>
-                            </div>
-                        </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">MySQL</div>
+                    <div class="card-back">
+                        <p class="CardDesc">Gerenciamento de bancos de dados relacionais.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
 
-        <!-- CONTATO -->
-        <section id="contato-section" class="full-section">
-            <div class="section-content">
-                <h2>Contato</h2>
-                <p>Entre em contato para colaborações ou projetos!</p>
-                <!-- Adicione formulário ou links de contato aqui -->
-            </div>
-        </section>
-    </main>
+<!-- CONTATO -->
+<section id="contato-section" class="full-section">
+    <div class="section-content contato-box">
+        <h2>Contato</h2>
 
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="script.js"></script>
+        <p class="contato-sub">
+            Aberto para conversas, projetos freelance, parcerias ou qualquer dúvida.
+        </p>
+
+        <div class="contato-items">
+            <a href="mailto:seuemail@gmail.com" class="contato-item">
+                <i class="fas fa-envelope"></i>
+                seuemail@gmail.com
+            </a>
+
+            <a href="https://wa.me/55SEUNUMERO" target="_blank" class="contato-item">
+                <i class="fab fa-whatsapp"></i>
+                WhatsApp
+            </a>
+
+            <a href="https://www.linkedin.com/in/SEULINK" target="_blank" class="contato-item">
+                <i class="fab fa-linkedin"></i>
+                LinkedIn
+            </a>
+
+            <a href="https://github.com/SEUGITHUB" target="_blank" class="contato-item">
+                <i class="fab fa-github"></i>
+                GitHub
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- Ionicons -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+    emailjs.init("k7v0xn9QPlTQv7xnn"); 
+</script>
+
+<!-- Seu JS -->
+<script src="script.js"></script>
 </body>
-
 </html>
