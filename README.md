@@ -44,22 +44,22 @@ src/
 ```Bash
 git clone [https://github.com/cellixx7/PortfolioMarcelo.git](https://github.com/cellixx7/PortfolioMarcelo.git)
 ```
-Instale as dependências:
+**Instale as dependências:**
 
 ```Bash
 npm install
 ```
-Inicie o servidor de desenvolvimento:
+**Inicie o servidor de desenvolvimento:**
 
 ```Bash
 npm run dev
 ```
-#📧 Contato
+# 📧 Contato
 Se você gostou do meu trabalho ou quer trocar uma ideia sobre desenvolvimento e design, sinta-se à vontade para me chamar:
 
-LinkedIn: linkedin.com/in/cellixx7
-Behance: behance.net/cellixx7
-E-mail: marcelovaz.contato@gmail.com
-Site: [cellixx7.netlify.app](https://cellixx7.netlify.app)
+**LinkedIn**: [linkedin.com/in/cellixx7](linkedin.com/in/cellixx7)
+**Behance**: [behance.net/cellixx7](https://behance.net/cellixx7)
+**E-mail**: marcelovaz.contato@gmail.com
+**Site**: [cellixx7.netlify.app](https://cellixx7.netlify.app)
 
 "Design is not just what it looks like and feels like. Design is how it works." — Steve Jobs
