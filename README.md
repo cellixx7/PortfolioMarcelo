@@ -8,34 +8,33 @@ Este repositório contém o código-fonte do meu site portfólio pessoal. O obje
 
 ## 🎨 O Projeto
 
-O portfólio foi planejado para refletir minha identidade visual e minhas habilidades técnicas. Ele não apenas lista meus projetos, mas demonstra na prática meu domínio em:
+O portfólio reflete minha identidade visual e habilidades técnicas, demonstrando na prática:
 - **UI/UX Design:** Interfaces limpas, intuitivas e focadas na experiência do usuário.
 - **Responsividade:** Adaptação completa para dispositivos móveis, tablets e desktops.
-- **Performance:** Código otimizado para carregamento rápido e navegação fluida.
+- **Interatividade:** Uso de JavaScript para modais, formulários e dinamismo na página.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-Para a construção deste projeto, utilizei uma stack moderna focada em produtividade e performance:
+Projeto construído com tecnologias fundamentais da web para garantir performance e compatibilidade:
 
-- **Frontend:** React.js + TypeScript
-- **Estilização:** Tailwind CSS (ou CSS Modules/Styled Components, ajuste conforme o seu)
-- **Animações:** Framer Motion (se usar) / CSS Transitions
-- **Deploy:** Netlify / Vercel
-- **Design:** Adobe Photoshop & Figma
+- **Estrutura:** HTML5 
+- **Estilização:** CSS3 (Design Responsivo)
+- **Interatividade:** JavaScript Vanilla (Manipulação de DOM e eventos)
+- **Deploy:** Netlify
 
 ---
 
 ## 📂 Estrutura de Pastas
 
 ```text
-src/
-├── assets/          # Imagens, ícones e arquivos estáticos
-├── components/      # Componentes reutilizáveis (Botões, Cards, Navbar)
-├── sections/        # Seções principais da página (Home, Sobre, Projetos)
-├── styles/          # Configurações globais de CSS e temas
-└── data/            # Arquivos JSON com as informações dos projetos
+PortfolioMarcelo/
+├── src/             # Ativos (Imagens de perfil, fundos, etc.)
+├── index.html       # Estrutura principal do site
+├── script.js        # Lógica de interatividade e funções
+├── style.css        # Estilização e identidade visual
+└── updates.md       # Log de atualizações e melhorias
 ```
 
 ## 🚀 Como Rodar o Projeto Localmente
@@ -44,16 +43,10 @@ src/
 ```Bash
 git clone [https://github.com/cellixx7/PortfolioMarcelo.git](https://github.com/cellixx7/PortfolioMarcelo.git)
 ```
-**Instale as dependências:**
+**Abra o arquivo**: 
+Basta abrir o `index.html` em qualquer navegador ou utilizar a extensão Live Server no VS Code.
 
-```Bash
-npm install
-```
-**Inicie o servidor de desenvolvimento:**
 
-```Bash
-npm run dev
-```
 ## 📧 Contato
 Se você gostou do meu trabalho ou quer trocar uma ideia sobre desenvolvimento e design, sinta-se à vontade para me chamar:
 
