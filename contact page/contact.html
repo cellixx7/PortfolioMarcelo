@@ -25,7 +25,7 @@
             <a href="../index.html#sobre-section" class="nav-item">Sobre</a>
             <a href="../index.html#portfolio-section" class="nav-item">Projetos</a>
             <a href="../index.html#skills-section" class="nav-item">Habilidades</a>
-            <a href="#" class="nav-item" style="color: var(--primary-color);">Contato</a>
+            <a href="#" class="nav-item" id="nav-contact-btn" style="color: var(--primary-color);">Contato</a>
             
             <div id="github" class="nav-item">
                 <a href="https://github.com/cellixx7" target="_blank" style="color: inherit; display: flex;">
@@ -35,70 +35,94 @@
         </div>
     </nav>
 
-
+    <div class="back-home-container">
+        <a href="../index.html" class="btn-back">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+            Voltar para Home
+        </a>
+    </div>
     
     <!-- Conteúdo Principal -->
     <main class="contact-page-container">
         
+        <div class="swap-wrapper">
+            <!-- Frente: Formulário -->
         <div class="contact-card">
+            <!-- Botão Circular de Troca (Posicionado à direita via CSS) -->
+            <button type="button" class="btn-info-section btn-floating-swap">
+                <ion-icon name="swap-horizontal-outline"></ion-icon>
+                <span class="default-tooltip">Visualizar Contatos</span>
+            </button>
             <div class="contact-container">
                 <form id="contact-form">
-                    <h2>Fale comigo</h2>
+                    <h2>Entre em contato</h2>
 
-                    <label for="name">Nome</label>
+                    <label for="name">Nome<font color="red">*</font></label>
                     <input type="text" id="name" name="user_name" placeholder="Seu nome" required>
 
-                    <label for="email">Email</label>
+                    <label for="email">Email<font color="red">*</font></label>
                     <input type="email" id="email" name="user_email" placeholder="seuemail@exemplo.com" required>
+
+                    <label for="phone">Telefone p/ contato</label>
+                    <input type="tel" id="phone" name="user_phone" placeholder="(XX) XXXXX-XXXX">
 
                     <label for="subject">Assunto</label>
                     <input type="text" id="subject" name="user_subject" placeholder="Opcional">
 
-                    <label for="message">Mensagem</label>
+                    <label for="message">Mensagem<font color="red">*</font></label>
                     <textarea id="message" name="user_message" rows="5" placeholder="Digite sua mensagem..." required></textarea>
 
-                    <button type="submit" class="btn bubbly" style="margin-top: 1.5rem; width: 100%;">Enviar Mensagem</button>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">Enviar Mensagem</button>
+                    </div>
                 </form>
 
-                <div class="back-home-container">
-                    <a href="../index.html" class="btn-back">
-                        <ion-icon name="arrow-back-outline"></ion-icon>
-                        Voltar para Home
-                    </a>
+            </div>
+        </div>
+
+            <!-- Verso: Informações -->
+    <div class="container-contact">
+        <div class="contact-info">
+            <h3 class="contact-title">Informações de Contato</h3>
+
+
+            <div class="itens-info-content">
+                <div class="item-info location">
+                    <ion-icon name="location-outline" class="Contact-Icons"></ion-icon>
+                    <p><strong>Localização:</strong> Brasília, DF, Brasil</p>
+                </div>
+
+                <div class="item-info email" onclick="window.location.href='mailto:marcelovaz.contato@gmail.com'" style="cursor: pointer;">
+                    <ion-icon name="mail" class="Contact-Icons"></ion-icon>
+                    <p><strong>Email:</strong> <a href="mailto:marcelovaz.contato@gmail.com" >marcelovaz.contato@gmail.com</a></p>
+                </div>
+
+                <div class="item-info wpp" onclick="window.open('https://wa.me/5561996291118', '_blank')" style="cursor: pointer;">
+                    <ion-icon name="logo-whatsapp" class="Contact-Icons"></ion-icon>
+                    <p ><strong>WhatsApp:</strong> <a>+(55) 61 99629-1118</a></p>
+                </div>
+
+                <div class="item-info linkedin" onclick="window.open('https://www.linkedin.com/in/cellixx7', '_blank')" style="cursor: pointer;">
+                    <ion-icon name="logo-linkedin" class="Contact-Icons"></ion-icon>
+                    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/cellixx7" target="_blank">linkedin.com/in/cellixx7</a></p>
+                </div>
+
+                <div class="item-info github" onclick="window.open('https://github.com/cellixx7', '_blank')" style="cursor: pointer;">
+                    <ion-icon name="logo-github" class="Contact-Icons"></ion-icon>
+                    <p><strong>GitHub:</strong> <a href="https://github.com/cellixx7" target="_blank">github.com/cellixx7</a></p>
+                </div>
+
+                <div class="item-info instagram" onclick="window.open('https://www.instagram.com/imcylex7', '_blank')" style="cursor: pointer;">
+                    <ion-icon name="logo-instagram" class="Contact-Icons"></ion-icon>
+                    <p><strong>Instagram:</strong> <a href="https://www.instagram.com/imcylex7" target="_blank">@imcylex7</a></p>
                 </div>
             </div>
         </div>
-<div class="contact">
-    <div class="container-contact">
-        <div class="contact-info">
-            <h3>Informações de Contato</h3>
-            <p>
-                <ion-icon name="mail" class="Contact-Icons"></ion-icon>
-            </p>
-            <p>
-                <strong>Email:</strong> <a href="mailto:marcelovaz.contato@gmail.com">marcelovaz.contato@gmail.com</a>
-            </p>
-
-            <p><ion-icon name="logo-whatsapp" class="Contact-Icons"></ion-icon></p>
-            <p><strong>WhatsApp:</strong> <a href="https://wa.me/5561996291118" target="_blank">+(55) 61 99629-1118</a></p>
-            
-            <p>
-                <ion-icon name="logo-linkedin" class="Contact-Icons"></ion-icon>
-            </p>
-            <p><strong>LinkedIn:</strong><a href="https://www.linkedin.com/in/cellixx7" target="_blank">linkedin.com/in/cellixx7</a></p>
-            <p>
-                <ion-icon name="logo-github" class="Contact-Icons"></ion-icon>
-            </p>
-            <p><strong>GitHub:</strong> <a href="https://github.com/cellixx7" target="_blank">github.com/cellixx7</a>
-            </p>
-            <p>
-                <ion-icon name="logo-instagram" class="Contact-Icons"></ion-icon>
-            </p>
-            <p><strong>Instagram:</strong> <a href="https://www.instagram.com/imcylex7" target="_blank">@imcylex7</a>
-            </p>
-        </div>
+        <button type="button" class="btn-info-section btn-floating-swap">
+                <ion-icon name="swap-horizontal-outline"></ion-icon>
+                <span class="default-tooltip">Entrar em Contato</span>
+            </button>
     </div>
-
         </div>
 
     </main>
