@@ -1,0 +1,125 @@
+<!-- /workspaces/PortfolioMarcelo/contact.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contato | Marcelo V. Dev FullStack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="contact.css" />
+</head>
+
+<body>
+
+    <!-- Navbar Reutilizada (Adaptada para navegação entre páginas) -->
+    <nav class="navbar">
+        <div id="logo">
+            <a href="../index.html" class="nomeTitle">Marcelo V.</a>
+        </div>
+
+        <div class="nav-links">
+            <a href="../index.html#sobre-section" class="nav-item">Sobre</a>
+            <a href="../index.html#portfolio-section" class="nav-item">Projetos</a>
+            <a href="../index.html#skills-section" class="nav-item">Habilidades</a>
+            <a href="#" class="nav-item" style="color: var(--primary-color);">Contato</a>
+            
+            <div id="github" class="nav-item">
+                <a href="https://github.com/cellixx7" target="_blank" style="color: inherit; display: flex;">
+                    <ion-icon name="logo-github"></ion-icon>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+    
+    <!-- Conteúdo Principal -->
+    <main class="contact-page-container">
+        
+        <div class="contact-card">
+            <div class="contact-container">
+                <form id="contact-form">
+                    <h2>Fale comigo</h2>
+
+                    <label for="name">Nome</label>
+                    <input type="text" id="name" name="user_name" placeholder="Seu nome" required>
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="user_email" placeholder="seuemail@exemplo.com" required>
+
+                    <label for="subject">Assunto</label>
+                    <input type="text" id="subject" name="user_subject" placeholder="Opcional">
+
+                    <label for="message">Mensagem</label>
+                    <textarea id="message" name="user_message" rows="5" placeholder="Digite sua mensagem..." required></textarea>
+
+                    <button type="submit" class="btn bubbly" style="margin-top: 1.5rem; width: 100%;">Enviar Mensagem</button>
+                </form>
+
+                <div class="back-home-container">
+                    <a href="../index.html" class="btn-back">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                        Voltar para Home
+                    </a>
+                </div>
+            </div>
+        </div>
+<div class="contact">
+    <div class="container-contact">
+        <div class="contact-info">
+            <h3>Informações de Contato</h3>
+            <p>
+                <ion-icon name="mail" class="Contact-Icons"></ion-icon>
+            </p>
+            <p>
+                <strong>Email:</strong> <a href="mailto:marcelovaz.contato@gmail.com">marcelovaz.contato@gmail.com</a>
+            </p>
+
+            <p><ion-icon name="logo-whatsapp" class="Contact-Icons"></ion-icon></p>
+            <p><strong>WhatsApp:</strong> <a href="https://wa.me/5561996291118" target="_blank">+(55) 61 99629-1118</a></p>
+            
+            <p>
+                <ion-icon name="logo-linkedin" class="Contact-Icons"></ion-icon>
+            </p>
+            <p><strong>LinkedIn:</strong><a href="https://www.linkedin.com/in/cellixx7" target="_blank">linkedin.com/in/cellixx7</a></p>
+            <p>
+                <ion-icon name="logo-github" class="Contact-Icons"></ion-icon>
+            </p>
+            <p><strong>GitHub:</strong> <a href="https://github.com/cellixx7" target="_blank">github.com/cellixx7</a>
+            </p>
+            <p>
+                <ion-icon name="logo-instagram" class="Contact-Icons"></ion-icon>
+            </p>
+            <p><strong>Instagram:</strong> <a href="https://www.instagram.com/imcylex7" target="_blank">@imcylex7</a>
+            </p>
+        </div>
+    </div>
+
+        </div>
+
+    </main>
+
+    
+<!-- Ionicons -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // Inicializa EmailJS (Importante manter aqui ou garantir que mailJs.js carregue depois)
+        emailjs.init("k7v0xn9QPlTQv7xnn"); 
+    </script>
+
+    <!-- Lógica de Envio de Email (mailJs.js já contém o listener para #contact-form) -->
+    <script src="mailJs.js"></script>
+    
+    <!-- Script principal para animações de botão (opcional, mas bom para consistência) -->
+    <script src="../script.js"></script>
+
+</body>
+</html>

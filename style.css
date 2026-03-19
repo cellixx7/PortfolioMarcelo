@@ -297,6 +297,7 @@ body::before {
     font-size: 4rem;
     margin-bottom: 1rem;
     cursor: default;
+    text-decoration: none !important;
     letter-spacing: 1px;
     font-weight: 600;
     color: #9c67ff;
@@ -352,6 +353,13 @@ body::before {
     text-align: left; /* Alterado: garante alinhamento à esquerda */
 }
 
+.nav-link {
+    display: flex;
+    justify-content: flex-start; /* Alinha os links à esquerda do header */
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    text-decoration: none;
+}
 
 
 .desc {
@@ -559,6 +567,7 @@ ul li:hover .title {
     font-size: 2.5rem;
     color: var(--text-primary);
     margin-bottom: 3rem;
+    text-decoration: none;
     text-align: center;
     position: relative;
     padding-bottom: 1rem;
@@ -572,6 +581,7 @@ ul li:hover .title {
     font-weight: 300;
     text-align: justify;      /* Mantém leitura organizada */
     color: #c2c2c2;          /* Cor do texto */
+    text-decoration: none;
 }
 
 /* Negrito com destaque elegante */
@@ -1119,6 +1129,7 @@ ul li:hover .title {
     font-size: 1em;
     padding: 1em 2em;
     border-radius: 10px;
+    text-decoration: none;
     cursor: pointer;
     position: relative;
     transition: transform ease-in 0.1s, box-shadow ease-in 0.25s, border ease-in 0.25s;
