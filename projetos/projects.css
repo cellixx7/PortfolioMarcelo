@@ -16,7 +16,8 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     padding: 0; /* Remove padding para imagem total */
-    height: 400px; /* Altura fixa para o card */
+    height: 350px; /* Altura fixa para o card */
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end; /* Joga conteúdo para baixo */
@@ -95,7 +96,7 @@ p {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100px;
     height: 100%;
     z-index: 0;
     border-radius: 16px;
