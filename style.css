@@ -122,10 +122,7 @@ html {
    ========================================================================== */
 body {
     /* Mantido o gradiente, mas sem animação. Apenas o primeiro gradiente será visível */
-    background: linear-gradient(-45deg, #000000, #17024d, #080018, #11013b);
-    
-    /* REMOVIDO: background-size: 400% 400%; */
-    /* REMOVIDO: animation: gradient var(--gradient-animation-duration) ease infinite; */
+    background: linear-gradient(-45deg, #000000, #12023d, #080018, #0e012e);
 
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
@@ -135,21 +132,6 @@ body {
     z-index: 1; 
 }
 
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('noisebg.jpg'); /* Substitua pela URL da sua imagem */
-    background-size: cover; /* Cobre todo o elemento */
-    background-position: center; /* Centraliza a imagem */
-    background-repeat: no-repeat; /* Evita repetição */
-    opacity: 0.05; /* A opacidade desejada: 5% */
-    z-index: -1; /* Coloca o pseudo-elemento atrás do conteúdo do body, mas ainda por cima do background do body */
-    pointer-events: none; /* Garante que o pseudo-elemento não interfira com interações do mouse */
-}
 
 .container {
     display: flex;
@@ -159,8 +141,6 @@ body::before {
     padding-left: 2%;
     position: relative;
     z-index: 1;
-    /* REMOVER: overflow-x: hidden; */ 
-    /* Isso deve ser mantido apenas no <html> ou <body> */
 }
 
 
@@ -549,8 +529,7 @@ ul li:hover .title {
 }
 
 #sobre-section,
-#portfolio-section,
-#contato-section {
+#portfolio-section {
     scroll-margin-top: -100px;
 }
 
@@ -639,57 +618,6 @@ ul li:hover .title {
     margin-top: -1rem;
 }
 
-#contato-section {
-    background-color: transparent;
-    clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 100%);
-    padding: 8rem 0;
-    position: relative;
-    z-index: 3;
-    margin-top: -2rem;
-}
-
-.contato-box {
-    text-align: center;
-    padding: 3rem 2rem;
-}
-
-.contato-sub {
-    font-size: 1.2rem;
-    margin: 1rem auto 2.5rem;
-    max-width: 600px;
-    color: var(--text-secondary);
-}
-
-.contato-items {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-}
-
-.contato-item {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    padding: 0.9rem 1.4rem;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(6px);
-    transition: 0.25s ease;
-    font-size: 1.1rem;
-    color: var(--text-primary);
-    text-decoration: none;
-}
-
-.contato-item:hover {
-    background: rgba(255,255,255,0.18);
-    transform: translateY(-2px);
-}
-
-.contato-item i {
-    font-size: 1.3rem;
-}
-
 
 
 .section-content {
@@ -706,14 +634,6 @@ ul li:hover .title {
 
     /* Estética */
     border-radius: 1rem;
-
-    /* Animação */
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-.section-content.animate-in {
-    animation: slideInUp 0.9s var(--ease-elastic) forwards;
 }
 
 .modern-grid {
@@ -891,12 +811,6 @@ ul li:hover .title {
     height: var(--card-height);
     perspective: 1000px;
     cursor: pointer;
-    opacity: 0; /* Animação */
-    transform: translateY(20px); /* Animação */
-}
-
-.card.animate-in {
-    animation: slideInUp 0.9s var(--ease-elastic) forwards;
 }
 
 .card-inner {
@@ -966,24 +880,6 @@ ul li:hover .title {
     cursor: pointer;
     position: relative;
     transition: box-shadow 0.25s;
-    opacity: 0; /* Animação */
-    transform: translateY(20px); /* Animação */
-}
-
-.modern-card.animate-in {
-    animation: slideInUp 0.6s ease-out forwards;
-}
-
-.modern-card:nth-child(2) {
-    animation-delay: 0.1s;
-}
-
-.modern-card:nth-child(3) {
-    animation-delay: 0.2s;
-}
-
-.modern-card:nth-child(4) {
-    animation-delay: 0.3s;
 }
 
 .modern-card::before {
@@ -1560,4 +1456,26 @@ ul li:hover .title {
     opacity: 1;
     visibility: visible;
     bottom: -45px; /* Movimento de deslize sutil */
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    text-align: center;
+    padding: 4px;
+    color: var(--text-primary);
+    background: rgba(15, 15, 15, 0.24);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(25px);
+
+    z-index: 1000;
+}
+
+.footer-p {
+    margin: 0;
+    font-size: 0.65rem !important;
+    font-weight: 300;
 }

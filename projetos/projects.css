@@ -1,0 +1,134 @@
+@import url('../style.css');
+
+/* Grid Responsivo para Projetos */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+/* Card do Projeto - Estilo Glassmorphism */
+.project-card {
+    position: relative;
+    background: #000; /* Fundo base caso imagem falhe */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 0; /* Remove padding para imagem total */
+    height: 400px; /* Altura fixa para o card */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Joga conteúdo para baixo */
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Overlay Gradient para legibilidade do texto */
+.project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+    z-index: 1;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 30px rgba(81, 0, 255, 0.15);
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+/* Tipografia */
+.project-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #fff;
+    z-index: 2;
+    padding: 0 1.5rem;
+    margin-bottom: 0.3rem; /* Título mais próximo da descrição */
+    transition: transform 0.4s ease;
+}
+
+
+p {
+    margin: 0;
+    color: var(--text-primary) !important;
+}
+
+.project-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    z-index: 2;
+    padding: 0 1.7rem;
+    
+    /* Esconder inicialmente */
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+/* Botão dentro do card */
+.project-card .btn {
+    z-index: 2;
+    margin: 0 1.5rem 0 1.5rem; /* Margem inicial zerada embaixo */
+    opacity: 0;
+    max-height: 0; /* Começa sem altura */
+    padding: 0 2em; /* Padding vertical zerado */
+    overflow: hidden;
+    transition: all 0.4s ease 0.1s; /* Delay leve */
+    align-self: flex-start; /* Alinha à esquerda */
+    pointer-events: none;
+}
+
+/* Imagens */
+.card-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    border-radius: 16px;
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.1);
+    filter: blur(4px);
+}
+
+/* Animação de Hover - Revelar Conteúdo */
+.project-card:hover .project-title {
+    transform: translateY(-10px);
+}
+
+.project-card:hover .project-description {
+    max-height: 150px; /* Altura suficiente para o texto */
+    opacity: 1;
+    transform: translateY(0);
+    margin-bottom: 0; /* Margem removida, distância controlada pelo botão */
+}
+
+.project-card:hover .btn {
+    opacity: 1;
+    max-height: 60px; /* Altura suficiente para o botão */
+    padding: 1em 2em; /* Restaura padding */
+    margin: 5px 1.5rem 1.5rem 1.5rem; /* 5px topo (distância da desc), 1.5rem laterais/baixo */
+    pointer-events: auto;
+}
